@@ -1,7 +1,7 @@
 name: Cloud_Project_ElLel_XaLed_EmCor #Etiquette permettant l'identification du workflow sur GitHub Actions
 
 on: 
-    pull_requests: #Déclenchement du Workflow lors d'une pull requests sur les branches suivantes : 
+    pull_request: #Déclenchement du Workflow lors d'une pull requests sur les branches suivantes : 
         branches: [ "main", "Xavier", "Emile", "eliot" ] 
         types: [opened, synchronize] #Types d'évènements surveillés : opened (new pull request) et synchronize (MAJ d'une pull request)
     push: #Déclenchement du Workflow lors d'un push sur les branches suivantes : 
@@ -27,11 +27,11 @@ jobs:
             - uses: yezz123/setup-uv@v4 #Utilise l'outil UV et vérifie son installation
             - run: uv --version
             - name: Install dependencies #Installe toutes les dép spécifiées dans uv.lock
-            - run: uv sync
+              run: uv sync
             - name: Build Project #Compile le projet
-            - run: uv build
+              run: uv build
             - name: Running unit tests #Lance les tests situées dans ".tests/" avec pytest
-            run: uv run pytest tests/
+              run: uv run pytest tests/
 
     build_docker_image: #Construit une image Docker et publie sur GHCR 
             if: github.ref == 'refs/heads/main' 
@@ -47,10 +47,10 @@ jobs:
                     username: ${{ github.actor }}
                     password: ${{ secrets.GITHUB_TOKEN }}
 
-                - name: Extract metadata (tags, labels) for Docker #Génére les tags pour l'IMG
-                    id: meta
-                    uses: docker/metadata-action@v3
-                    with:
+                - name: Extract metadata (tags, labels) for Docker 
+                  id: meta
+                  uses: docker/metadata-action@v3
+                  with:
                       images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
                       tags: | #Associe un tag à  la branche, chaque IMG unique avec le SHA, tag "latest" pour la version la + récente
                         type=ref,event=branch 
@@ -58,8 +58,8 @@ jobs:
                         type=raw,value=latest
 
                 - name: Build and push Docker image #Construit et publie l'image docker
-                    uses: docker/build-push-action@v4
-                    with:
+                  uses: docker/build-push-action@v4
+                  with:
                         context: .  #On vient chercher à la racine
                         push: true
                         tags: ${{ steps.meta.outputs.tags }}
