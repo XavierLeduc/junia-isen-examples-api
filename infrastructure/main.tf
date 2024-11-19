@@ -1,7 +1,7 @@
 
 provider "azurerm" {
-    subscription_id = var.subscription_id
-    features {}
+  features {}
+  subscription_id = var.subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -39,7 +39,7 @@ module "blob_storage" {
   location              = var.location
 }
 
-module "postgresql" {
+/*module "postgresql" {
   source                  = "./modules/database"
   postgresql_server_name  = "example-postgresql-server"
   resource_group_name     = azurerm_resource_group.rg.name
@@ -47,7 +47,7 @@ module "postgresql" {
   admin_username          = "adminuser"
   admin_password          = "SuperSecurePassword123"
   database_name           = "exampledb"
-}
+}*/
 
 module "network" {
   source              = "./modules/network"

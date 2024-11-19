@@ -1,4 +1,4 @@
-resource "azurerm_postgresql_flexible_server" "example" {
+/*resource "azurerm_postgresql_flexible_server" "example" {
   name                      = var.postgresql_server_name
   resource_group_name        = var.resource_group_name
   location                  = var.location
@@ -27,3 +27,4 @@ resource "azurerm_postgresql_flexible_server_database" "example" {
   charset                   = "UTF8"        # Jeu de caractères
   collation                 = "en_US"  # Collation correcte
 }
+*/

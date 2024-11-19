@@ -1,4 +1,4 @@
-variable "postgresql_server_name" {
+/*variable "postgresql_server_name" {
   description = "Le nom du serveur PostgreSQL"
   type        = string
 }
@@ -27,4 +27,4 @@ variable "admin_password" {
 variable "database_name" {
   description = "Nom de la base de données PostgreSQL"
   type        = string
-}
+}*/

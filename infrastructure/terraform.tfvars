@@ -1,8 +1,8 @@
 resource_group_name = "resource-group-test" # A remplir
-location            = "France Central"           # A remplir si différent
-email = "xavier.leduc@student.junia.com"
-github_handle = "XavierLeduc"
-subscription_id = "3d65e784-f00c-4dac-b128-96ff50615531"
+location = "francecentral"    # A remplir si différent
+email = "eliot.leleu@student.junia.com"
+github_handle = "EliotLeleu"
+subscription_id = "5769a05c-e7f3-4edb-a11a-012e2b4d94f6"
 app_name = "test-aps-projet"
 app_service_plan_id = "service-plan-id-test"
 storage_account_name   = "blobstorageprojet"
