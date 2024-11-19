@@ -5,7 +5,11 @@ on:
         branches: [ "main", "Xavier", "Emile", "eliot" ] 
         types: [opened, synchronize] #Types d'évènements surveillés : opened (new pull request) et synchronize (MAJ d'une pull request)
     push: #Déclenchement du Workflow lors d'un push sur les branches suivantes : 
-        branches: [ "main", "Xavier", "Emile", "eliot" ] 
+        branches: 
+            - main
+            - eliot
+            - Xavier
+            - Emile 
 
 env: 
     REGISTRY: ghcr.io #Adresse du registre Docker (GitHub Container Registry)
@@ -17,7 +21,7 @@ permissions: #Le workflow peut lire et publier (une image Docker ?) sur le dép�
 
 jobs: 
     check_service: #Test l'appli lors des Push Requests et des pulls + exécute des tests
-        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile'
         runs-on: ubuntu-latest #Utilise une VM Ubuntu pour exécuter (par défaut)
         steps: 
             - uses: actions/checkout@v4 #Télécharge le contenu du dépot
