@@ -14,15 +14,10 @@ variable "vnet_name" {
 }
 
 variable "address_space" {
-    description = "Espace des adresses IP"
 }
 
 variable "app_subnet_name" {
-    description = "Nom du subnet de l'App Service"
-    type = string
 }
 
 variable "storage_subnet_name" {
-    description = "Nom du subnet du Blob Storage"
-    type = string
 }
