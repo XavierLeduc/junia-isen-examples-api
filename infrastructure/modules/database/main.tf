@@ -1,30 +1,21 @@
-/*resource "azurerm_postgresql_flexible_server" "example" {
-  name                      = var.postgresql_server_name
-  resource_group_name        = var.resource_group_name
-  location                  = var.location
-  administrator_login       = var.admin_username  # Nom d'utilisateur administrateur
-  administrator_password    = var.admin_password
+resource "azurerm_postgresql_server" "postgresql" {
+  name                = var.postgresql_server_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku_name            = "B_Gen5_1"
+  storage_mb          = 5120
+  version             = "11"  # Version supportée
+  administrator_login = var.admin_username
+  administrator_login_password = var.admin_password
 
-  version                   = "13"  # Version PostgreSQL (changez selon vos besoins)
-
-  sku_name                  = "B_Standard_B1ms"   # Choix d'un SKU valide
-  storage_mb                = 32768               # Taille du stockage en Mo (doit être un nombre valide)
-
-  backup_retention_days     = 7                  # Durée des sauvegardes
-
- 
-  tags = {
-    environment = "Production"
-  }
-
+  ssl_enforcement_enabled       = true
+  public_network_access_enabled = false
 }
 
-# Création de la base de données PostgreSQL sur le serveur flexible
-resource "azurerm_postgresql_flexible_server_database" "example" {
-  name                      = var.database_name
-  server_id                 = azurerm_postgresql_flexible_server.example.id  # Utilisation de l'ID du serveur
-
-  charset                   = "UTF8"        # Jeu de caractères
-  collation                 = "en_US"  # Collation correcte
+resource "azurerm_postgresql_database" "database" {
+  name                = var.database_name
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql.name
+  charset             = "UTF8"
+  collation           = "en_US.UTF8"
 }
-*/

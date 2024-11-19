@@ -1,30 +1,34 @@
-/*variable "postgresql_server_name" {
-  description = "Le nom du serveur PostgreSQL"
+variable "postgresql_server_name" {
+  description = "Name of the PostgreSQL server"
   type        = string
 }
 
-variable "resource_group_name" {
-  description = "Le nom du groupe de ressources"
+variable "database_name" {
+  description = "Name of the PostgreSQL database"
   type        = string
 }
 
 variable "location" {
-  description = "La localisation des ressources"
+  description = "Azure Region"
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the Resource Group"
   type        = string
 }
 
 variable "admin_username" {
-  description = "Nom d'utilisateur administrateur"
+  description = "Administrator username for PostgreSQL"
   type        = string
 }
 
 variable "admin_password" {
-  description = "Mot de passe administrateur"
+  description = "Administrator password for PostgreSQL"
   type        = string
-  sensitive   = true
 }
 
-variable "database_name" {
-  description = "Nom de la base de données PostgreSQL"
+variable "subnet_id" {
+  description = "ID of the subnet for PostgreSQL"
   type        = string
-}*/
+}

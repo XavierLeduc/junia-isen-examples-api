@@ -1,19 +1,19 @@
-variable "resource_group_name" {
-  description = "Nom du groupe de ressources Azure" # A remplir
-  default     = "resource-group" # A remplir
-}
-
-variable "location" {
-  description = "Localisation des ressources Azure"
-  default     = "France Central"# A remplir si différent
-}
-
-variable "app_service_plan_id" {
-  description = "ID du plan de service pour l'App Service"
+variable "app_service_plan_name" {
+  description = "Name of the App Service Plan"
   type        = string
 }
 
 variable "app_name" {
-  description = "Nom de l'application web"
+  description = "Name of the App Service"
+  type        = string
+}
+
+variable "location" {
+  description = "Azure Region"
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the Resource Group"
   type        = string
 }

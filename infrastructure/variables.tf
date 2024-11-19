@@ -1,96 +1,64 @@
+variable "subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+}
 
 variable "resource_group_name" {
-  description = "Nom du groupe de ressources Azure" # A remplir
-  default     = "resource-group" # A remplir
+  description = "Resource Group Name"
+  type        = string
 }
 
 variable "location" {
-  description = "Localisation des ressources Azure"
-  default     = "France Central"# A remplir si différent
+  description = "Azure Region"
+  type        = string
 }
 
-#### Identity
-
-variable "subscription_id" {
-  description = "subscription id"
-  type = string
+variable "vnet_name" {
+  description = "Virtual Network Name"
+  type        = string
 }
 
-variable "email" {
-  description = "adresse mail"
-  type = string
+variable "address_space" {
+  description = "Address space for the VNet"
+  type        = list(string)
 }
-
-#### APP
 
 variable "app_name" {
-  description = "Nom de l'application web"
-  type        = string
-  
-}
-
-variable "app_service_plan_id" {
-  description = "ID du plan de service pour l'App Service"
+  description = "App Service Name"
   type        = string
 }
 
-
-#### Storage
+variable "app_service_plan_name" {
+  description = "Name of the App Service Plan"
+  type        = string
+}
 
 variable "storage_account_name" {
-  description = "Nom du compte de stockage"
+  description = "Storage Account Name"
   type        = string
 }
 
 variable "container_name" {
-  description = "Nom du conteneur de stockage"
+  description = "Storage Container Name"
   type        = string
 }
-
-#### Database
 
 variable "postgresql_server_name" {
-  description = "Nom du serveur PostgreSQL"
-  type        = string
-}
-
-variable "database_name" {
-  description = "Nom de la base de données PostgreSQL"
+  description = "PostgreSQL Server Name"
   type        = string
 }
 
 variable "admin_username" {
-  description = "Nom d'utilisateur administrateur du serveur PostgreSQL"
+  description = "PostgreSQL Admin Username"
   type        = string
 }
 
 variable "admin_password" {
-  description = "Mot de passe administrateur pour le serveur PostgreSQL"
+  description = "PostgreSQL Admin Password"
   type        = string
 }
 
-variable "subnet_id" {
-  description = "L'ID du sous-réseau dans lequel le serveur PostgreSQL sera déployé"
+variable "database_name" {
+  description = "Database Name"
   type        = string
-}
-
-# Network 
-
-variable "vnet_name" {
-    description = "Nom du VNet"
-    type = string
-}
-
-variable "address_space" {
-    description = "Espace des adresses IP"
-}
-
-variable "app_subnet_name" {
-    description = "Nom du subnet de l'App Service"
-    type = string
-}
-
-variable "storage_subnet_name" {
-    description = "Nom du subnet du Blob Storage"
-    type = string
 }

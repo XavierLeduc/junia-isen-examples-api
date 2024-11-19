@@ -1,19 +1,19 @@
-variable "resource_group_name" {
-  description = "Nom du groupe de ressources Azure" # A remplir
-  default     = "resource-group" # A remplir
-}
-
-variable "location" {
-  description = "Localisation des ressources Azure"
-  default     = "France Central"# A remplir si différent
-}
-
 variable "storage_account_name" {
-  description = "Nom du compte de stockage"
+  description = "Name of the storage account"
   type        = string
 }
 
 variable "container_name" {
-  description = "Nom du conteneur de stockage"
+  description = "Name of the storage container"
+  type        = string
+}
+
+variable "location" {
+  description = "Azure Region"
+  type        = string
+}
+
+variable "resource_group_name" {
+  description = "Name of the Resource Group"
   type        = string
 }

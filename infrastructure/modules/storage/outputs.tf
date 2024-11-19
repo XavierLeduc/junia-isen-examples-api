@@ -1,9 +1,15 @@
 output "storage_account_name" {
-  value       = azurerm_storage_account.junia-storage-account.name
-  description = "Nom du compte de stockage"
+  value = azurerm_storage_account.storage_account.name
+}
+
+output "storage_account_id" {
+  value = azurerm_storage_account.storage_account.id
+}
+
+output "container_name" {
+  value = azurerm_storage_container.storage_container.name
 }
 
 output "container_url" {
-  value       = "https://${azurerm_storage_account.junia-storage-account.name}.blob.core.windows.net/${azurerm_storage_container.junia-storage-container.name}"
-  description = "URL du conteneur de stockage"
+  value = azurerm_storage_container.storage_container.id
 }

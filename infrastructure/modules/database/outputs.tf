@@ -1,5 +1,11 @@
-/*output "postgresql_connection_string" {
-  value = "postgresql://${azurerm_postgresql_flexible_server.example.administrator_login}@${azurerm_postgresql_flexible_server.example.fqdn}:5432/${azurerm_postgresql_flexible_server_database.example.name}"
-  sensitive = true  
-  description = "Chaîne de connexion PostgreSQL"
-}*/
+output "postgresql_server_name" {
+  value = azurerm_postgresql_server.postgresql.name
+}
+
+output "postgresql_server_id" {
+  value = azurerm_postgresql_server.postgresql.id
+}
+
+output "database_name" {
+  value = azurerm_postgresql_database.database.name
+}
