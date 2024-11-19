@@ -170,3 +170,5 @@ crash.log
 infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10.0/windows_amd64/terraform-provider-azurerm_v4.10.0_x5.exe
 infrastructure/terraform.tfvars
 infrastructure/terraform.tfvars
+**/terraform.tfvars
+infrastructure/terraform.tfvars
