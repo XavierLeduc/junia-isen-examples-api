@@ -1,11 +1,11 @@
 variable "resource_group_name" {
-  description = "Nom du groupe de ressources"
-  type        = string
+  description = "Nom du groupe de ressources Azure" # A remplir
+  default     = "resource-group" # A remplir
 }
 
 variable "location" {
-  description = "Région Azure"
-  type        = string
+  description = "Localisation des ressources Azure"
+  default     = "France Central"# A remplir si différent
 }
 
 variable "app_service_plan_id" {

@@ -1,5 +1,4 @@
 
-
 variable "resource_group_name" {
   description = "Nom du groupe de ressources Azure" # A remplir
   default     = "resource-group" # A remplir
@@ -29,6 +28,12 @@ variable "app_name" {
   type        = string
   
 }
+
+variable "app_service_plan_id" {
+  description = "ID du plan de service pour l'App Service"
+  type        = string
+}
+
 
 #### Storage
 
@@ -67,4 +72,25 @@ variable "admin_password" {
 variable "subnet_id" {
   description = "L'ID du sous-réseau dans lequel le serveur PostgreSQL sera déployé"
   type        = string
+}
+
+# Network 
+
+variable "vnet_name" {
+    description = "Nom du VNet"
+    type = string
+}
+
+variable "address_space" {
+    description = "Espace des adresses IP"
+}
+
+variable "app_subnet_name" {
+    description = "Nom du subnet de l'App Service"
+    type = string
+}
+
+variable "storage_subnet_name" {
+    description = "Nom du subnet du Blob Storage"
+    type = string
 }

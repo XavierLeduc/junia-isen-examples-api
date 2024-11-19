@@ -1,4 +1,4 @@
-resource "azurerm_app_service" "example" {
+resource "azurerm_app_service" "junia-app-service" {
   name                = var.app_name
   location            = var.location
   resource_group_name = var.resource_group_name

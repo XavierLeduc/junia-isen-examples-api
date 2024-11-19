@@ -162,9 +162,11 @@ cython_debug/
 #.idea/
 
 # Terraform files to ignore
-.terraform/          # Répertoire local contenant les plugins et modules téléchargés
-*.tfstate            # Fichiers d'état sensibles
-*.tfstate.backup     # Sauvegardes d'état
-crash.log            # Logs de crash Terraform
-.terraform.lock.hcl  # Verrouillage des versions des plugins (si vous voulez le gérer localement)
+.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log
+.terraform.lock.hcl
 infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10.0/windows_amd64/terraform-provider-azurerm_v4.10.0_x5.exe
+infrastructure/terraform.tfvars
+infrastructure/terraform.tfvars

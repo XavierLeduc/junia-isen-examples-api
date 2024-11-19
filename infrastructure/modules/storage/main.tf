@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "example" {
+resource "azurerm_storage_account" "junia-storage-account" {
   name                     = var.storage_account_name
   resource_group_name       = var.resource_group_name
   location                 = var.location
@@ -10,7 +10,7 @@ resource "azurerm_storage_account" "example" {
   }
 }
 
-resource "azurerm_storage_container" "example" {
+resource "azurerm_storage_container" "junia-storage-container" {
   name                  = var.container_name
   storage_account_name  = azurerm_storage_account.example.name
   container_access_type = "private"
