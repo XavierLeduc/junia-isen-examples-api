@@ -40,7 +40,7 @@ module "blob_storage" {
 }
 
 # Database Module
-module "database" {
+/*module "database" {
   source                  = "./modules/database"
   resource_group_name     = azurerm_resource_group.resource_group.name
   location                = var.location
@@ -49,4 +49,4 @@ module "database" {
   admin_password          = var.admin_password
   database_name           = var.database_name
   subnet_id               = module.network.database_subnet_id
-}
+}*/
