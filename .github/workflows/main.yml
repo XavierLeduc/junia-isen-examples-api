@@ -38,7 +38,7 @@ jobs:
               run: uv run pytest tests/
 
     build_docker_image: #Construit une image Docker et publie sur GHCR 
-            if: github.ref == 'refs/heads/main' 
+            if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile' 
             runs-on: ubuntu-latest #uniquement sur main pour l'instant
             steps: 
                 - name: Checkout repository #DL le code du dépôt
