@@ -167,3 +167,4 @@ cython_debug/
 *.tfstate.backup     # Sauvegardes d'état
 crash.log            # Logs de crash Terraform
 .terraform.lock.hcl  # Verrouillage des versions des plugins (si vous voulez le gérer localement)
+infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10.0/windows_amd64/terraform-provider-azurerm_v4.10.0_x5.exe
