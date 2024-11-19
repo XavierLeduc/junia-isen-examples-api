@@ -1,0 +1,71 @@
+name: Cloud_Project_ElLel_XaLed_EmCor #Etiquette permettant l'identification du workflow sur GitHub Actions
+
+on: 
+    pull_requests: #Déclenchement du Workflow lors d'une pull requests sur les branches suivantes : 
+        branches: [ "main", "Xavier", "Emile", "eliot" ] 
+        types: [opened, synchronize] #Types d'évènements surveillés : opened (new pull request) et synchronize (MAJ d'une pull request)
+    push: #Déclenchement du Workflow lors d'un push sur les branches suivantes : 
+        branches: [ "main", "Xavier", "Emile", "eliot" ] 
+
+env: 
+    REGISTRY: ghcr.io #Adresse du registre Docker (GitHub Container Registry)
+    IMAGE_NAME: ${{ github.repository }} #Nom de l'img Docker, automatiquement dérivé du dépot Git
+
+permissions: #Le workflow peut lire et publier (une image Docker ?) sur le dépôt
+    contents: read
+    packages: write 
+
+jobs: 
+    check_service: #Test l'appli lors des Push Requests et des pulls + exécute des tests
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest #Utilise une VM Ubuntu pour exécuter (par défaut)
+        steps: 
+            - uses: actions/checkout@v4 #Télécharge le contenu du dépot
+            - uses: actions/setup-python@v4 #Installe la version de Python utilisé dans le projet
+              with:
+                python-version: "3.12"
+            - uses: yezz123/setup-uv@v4 #Utilise l'outil UV et vérifie son installation
+            - run: uv --version
+            - name: Install dependencies #Installe toutes les dép spécifiées dans uv.lock
+            - run: uv sync
+            - name: Build Project #Compile le projet
+            - run: uv build
+            - name: Running unit tests #Lance les tests situées dans ".tests/" avec pytest
+            run: uv run pytest tests/
+
+    build_docker_image: #Construit une image Docker et publie sur GHCR 
+            if: github.ref == 'refs/heads/main' 
+            runs-on: ubuntu-latest #uniquement sur main pour l'instant
+            steps: 
+                - name: Checkout repository #DL le code du dépôt
+                  uses: actions/checkout@v3
+
+                - name: Log in to the Container registry #Se connecter à GitHub Packages
+                  uses: docker/login-action@    
+                  with:
+                    registry: ${{ env.REGISTRY }}
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
+
+                - name: Extract metadata (tags, labels) for Docker #Génére les tags pour l'IMG
+                    id: meta
+                    uses: docker/metadata-action@v3
+                    with:
+                      images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                      tags: | #Associe un tag à  la branche, chaque IMG unique avec le SHA, tag "latest" pour la version la + récente
+                        type=ref,event=branch 
+                        type=sha
+                        type=raw,value=latest
+
+                - name: Build and push Docker image #Construit et publie l'image docker
+                    uses: docker/build-push-action@v4
+                    with:
+                        context: .  #On vient chercher à la racine
+                        push: true
+                        tags: ${{ steps.meta.outputs.tags }}
+                        labels: ${{ steps.meta.outputs.labels }}
+
+                    #Maybe we'll have to perform terraform plan and apply here 
+                    #to deploy the infrastructure on the cloud
+
+
