@@ -21,26 +21,25 @@ module "network" {
 
 # App Service Module
 module "app_service" {
-  source              = "./modules/app_service"
-  resource_group_name = azurerm_resource_group.resource_group.name
-  location            = var.location
-  app_name            = var.app_name
+  source                = "./modules/app_service"
+  resource_group_name   = azurerm_resource_group.resource_group.name
+  location              = var.location
+  app_name              = var.app_name
   app_service_plan_name = var.app_service_plan_name
 }
 
-
-
 # Storage Module
 module "blob_storage" {
-  source              = "./modules/storage"
-  storage_account_name = var.storage_account_name
-  container_name       = var.container_name
-  resource_group_name  = azurerm_resource_group.resource_group.name
-  location             = var.location
+  source                = "./modules/storage"
+  storage_account_name  = var.storage_account_name
+  container_name        = var.container_name # Correctement défini ici
+  resource_group_name   = azurerm_resource_group.resource_group.name
+  location              = var.location
 }
 
-# Database Module
-/*module "database" {
+
+# Database Module (Optional)
+module "database" {
   source                  = "./modules/database"
   resource_group_name     = azurerm_resource_group.resource_group.name
   location                = var.location
@@ -49,4 +48,4 @@ module "blob_storage" {
   admin_password          = var.admin_password
   database_name           = var.database_name
   subnet_id               = module.network.database_subnet_id
-}*/
+}

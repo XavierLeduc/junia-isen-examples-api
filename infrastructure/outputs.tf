@@ -10,6 +10,6 @@ output "container_url" {
   value = module.blob_storage.container_url
 }
 
-/*output "postgresql_server_name" {
+output "postgresql_server_name" {
   value = module.database.postgresql_server_name
-}*/
+}

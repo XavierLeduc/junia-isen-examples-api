@@ -56,6 +56,7 @@ variable "admin_username" {
 variable "admin_password" {
   description = "PostgreSQL Admin Password"
   type        = string
+  sensitive   = true
 }
 
 variable "database_name" {

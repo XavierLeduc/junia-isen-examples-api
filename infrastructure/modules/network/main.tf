@@ -25,3 +25,4 @@ resource "azurerm_subnet" "database_subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.3.0/24"]
 }
+
