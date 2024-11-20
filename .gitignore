@@ -161,6 +161,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+
 # Terraform files to ignore
 .terraform/
 *.tfstate
@@ -172,3 +173,7 @@ infrastructure/terraform.tfvars
 infrastructure/terraform.tfvars
 **/terraform.tfvars
 infrastructure/terraform.tfvars
+=======
+infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10.0/windows_amd64/LICENSE.txt
+infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10.0/windows_amd64/terraform-provider-azurerm_v4.10.0_x5.exe
+infrastructure/terraform.tfstate
