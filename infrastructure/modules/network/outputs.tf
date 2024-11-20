@@ -9,3 +9,7 @@ output "storage_subnet_id" {
 output "database_subnet_id" {
   value = azurerm_subnet.database_subnet.id
 }
+
+output "vnet_id" {
+  value = azurerm_virtual_network.vnet.id
+}

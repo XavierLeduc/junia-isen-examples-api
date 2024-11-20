@@ -26,9 +26,15 @@ variable "admin_username" {
 variable "admin_password" {
   description = "Administrator password for PostgreSQL"
   type        = string
+  sensitive   = true
 }
 
 variable "subnet_id" {
-  description = "ID of the subnet for PostgreSQL"
+  description = "ID of the delegated subnet for PostgreSQL Flexible Server"
+  type        = string
+}
+
+variable "vnet_id" {
+  description = "ID of the Virtual Network"
   type        = string
 }

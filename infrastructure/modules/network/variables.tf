@@ -1,7 +1,9 @@
 variable "vnet_name" {
-  description = "Virtual Network Name"
+  description = "The name of the Virtual Network"
   type        = string
+  default     = null
 }
+
 
 variable "address_space" {
   description = "Address space for the VNet"
@@ -9,7 +11,7 @@ variable "address_space" {
 }
 
 variable "resource_group_name" {
-  description = "Resource Group Name"
+  description = "Name of the Resource Group"
   type        = string
 }
 
@@ -35,3 +37,4 @@ variable "database_subnet_name" {
   type        = string
   default     = "database-subnet"
 }
+

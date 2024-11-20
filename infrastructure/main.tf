@@ -32,13 +32,12 @@ module "app_service" {
 module "blob_storage" {
   source                = "./modules/storage"
   storage_account_name  = var.storage_account_name
-  container_name        = var.container_name # Correctement défini ici
+  container_name        = var.container_name
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
 }
 
-
-# Database Module (Optional)
+# Database Module
 module "database" {
   source                  = "./modules/database"
   resource_group_name     = azurerm_resource_group.resource_group.name
@@ -48,4 +47,5 @@ module "database" {
   admin_password          = var.admin_password
   database_name           = var.database_name
   subnet_id               = module.network.database_subnet_id
+  vnet_id                 = module.network.vnet_id
 }
