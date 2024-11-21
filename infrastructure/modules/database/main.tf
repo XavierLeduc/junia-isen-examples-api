@@ -19,6 +19,10 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   tags = {
     environment = "Production"                                    # Tags pour l'organisation et la gestion des ressources.
   }
+  high_availability {
+    mode                     = "ZoneRedundant"
+    standby_availability_zone = "2"
+  }
 }
 
 # Ressource : Base de données PostgreSQL
@@ -45,4 +49,26 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dns_zone_link" {
   resource_group_name   = var.resource_group_name                  # Groupe de ressources Azure.
   private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns_zone.name # Nom de la zone DNS privée.
   virtual_network_id    = var.vnet_id                              # ID du réseau virtuel auquel lier la zone DNS.
+}
+
+resource "azurerm_private_endpoint" "postgres_private_endpoint" {
+  name                = "postgres-private-endpoint"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.db_subnet_id
+
+  private_service_connection {
+    name                           = "postgres-connection"
+    private_connection_resource_id = var.postgresql_server_id
+    is_manual_connection           = false
+    subresource_names              = ["postgresql"]
+  }
+}
+
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
+  name                = "allow-vnet"
+  start_ip_address    = "10.0.0.0"
+  end_ip_address      = "10.255.255.255"
+  server_id           = var.postgresql_server_id
+
 }

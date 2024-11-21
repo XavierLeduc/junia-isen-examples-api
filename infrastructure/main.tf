@@ -30,6 +30,8 @@ module "app_service" {
   location              = var.location
   app_name              = var.app_name
   app_service_plan_name = var.app_service_plan_name
+  app_subnet_id         = var.app_subnet_id
+  app_service_id        = var.app_service_id
 }
 
 # Storage Module
@@ -40,6 +42,8 @@ module "blob_storage" {
   container_name        = var.container_name
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
+  blob_subnet_id        = var.blob_subnet_id
+  storage_account_id    = var.storage_account_id
 }
 
 # Database Module
@@ -54,4 +58,6 @@ module "database" {
   database_name           = var.database_name
   subnet_id               = module.network.database_subnet_id # ID du sous-réseau pour PostgreSQL.
   vnet_id                 = module.network.vnet_id # ID du réseau virtuel.
+  db_subnet_id            = var.db_subnet_id
+  postgresql_server_id    = var.postgresql_server_id
 }
