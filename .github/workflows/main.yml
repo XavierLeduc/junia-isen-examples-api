@@ -1,4 +1,6 @@
-name: Cloud_Project_ElLel_XaLed_EmCor #Etiquette permettant l'identification du workflow sur GitHub Actions
+#Crédit : Louis SKRZYPCZAK pour le partage de code.     
+
+name: Cloud_Project_ElLel_XaLed_EmCor #Identification du workflow dans GitHub Actions
 
 on: 
     pull_request: #Déclenchement du Workflow lors d'une pull requests sur les branches suivantes : 
@@ -15,12 +17,12 @@ env:
     REGISTRY: ghcr.io #Adresse du registre Docker (GitHub Container Registry)
     IMAGE_NAME: ${{ github.repository }} #Nom de l'img Docker, automatiquement dérivé du dépot Git
 
-permissions: #Le workflow peut lire et publier (une image Docker ?) sur le dépôt
+permissions: #Accord de perm, ici capable de lire et publier (une image Docker par ex) sur le dépôt
     contents: read
     packages: write 
 
 jobs: 
-    check_service: #Test l'appli lors des Push Requests et des pulls + exécute des tests
+    check_service: #Test l'appli lors des Pull Requests et des push + exécute des tests
         if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile'
         runs-on: ubuntu-latest #Utilise une VM Ubuntu pour exécuter (par défaut)
         steps: 
