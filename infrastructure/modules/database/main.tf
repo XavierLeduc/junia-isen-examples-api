@@ -25,8 +25,8 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   }
 }
 
-# Ressource : Base de données PostgreSQL
-# Cette ressource crée une base de données dans le serveur PostgreSQL Flexible créé précédemment.
+#Ressource : Base de données PostgreSQL
+#Cette ressource crée une base de données dans le serveur PostgreSQL Flexible créé précédemment.
 resource "azurerm_postgresql_flexible_server_database" "database" {
   name       = var.database_name                                  # Nom de la base de données.
   server_id  = azurerm_postgresql_flexible_server.postgresql.id   # ID du serveur PostgreSQL Flexible associé.
