@@ -88,15 +88,15 @@ jobs:
                 terraform_version: 1.9.8 # Version de Terraform
 
             - name: Initialize Terraform
-              working-directory: ./infrastructure/.terraform
+              working-directory: ./infrastructure
               run: terraform init
 
             - name: Plan Terraform changes
-              working-directory: ./infrastructure/.terraform
+              working-directory: ./infrastructure
               run: terraform plan -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
             - name: Apply Terraform changes
-              working-directory: ./infrastructure/.terraform
+              working-directory: ./infrastructure
               run: terraform apply -auto-approve -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
 
