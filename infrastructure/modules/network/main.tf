@@ -44,7 +44,7 @@ resource "azurerm_subnet" "database_subnet" {
 
   # Délégation pour PostgreSQL Flexible Server
   delegation {
-    name = "delegation-for-postgresql"               # Nom de la délégation.
+    name = "delegation-for-postgresql"               # Nom de la délégation
     service_delegation {
       name = "Microsoft.DBforPostgreSQL/flexibleServers" # Service délégué pour PostgreSQL Flexible Server.
       actions = [
