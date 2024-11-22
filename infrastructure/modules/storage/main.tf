@@ -15,3 +15,23 @@ resource "azurerm_storage_container" "storage_container" {
   storage_account_name  = azurerm_storage_account.storage_account.name # Nom du compte de stockage associé.
   container_access_type = "private"                             # Type d'accès au conteneur : "private" pour limiter l'accès.
 }
+
+resource "azurerm_private_endpoint" "blob_private_endpoint" {
+  name                = "blob-private-endpoint"
+  location            = var.location
+  resource_group_name = var.resource_group_name 
+  subnet_id           = var.blob_subnet_id
+
+  private_service_connection {
+    name                           = "blob-connection"
+    private_connection_resource_id = var.storage_account_id
+    is_manual_connection           = false
+    subresource_names              = ["blob"]
+  }
+}
+
+resource "azurerm_storage_account_network_rules" "blob_network_rules" {
+  storage_account_id         = var.storage_account_id
+  default_action             = "Deny"
+  virtual_network_subnet_ids = [var.blob_subnet_id]
+}

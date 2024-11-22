@@ -62,3 +62,13 @@ variable "vnet_id" {
   description = "ID du réseau virtuel associé à PostgreSQL Flexible Server."
   type        = string
 }
+
+variable "db_subnet_id" {
+  description = "ID du subnet pour le PostgreSQL Private Endpoint"
+  type        = string
+}
+
+variable "postgresql_server_id" {
+  description = "ID du serveur PostgreSQL"
+  type        = string
+}

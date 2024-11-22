@@ -14,6 +14,15 @@ resource "azurerm_subnet" "app_subnet" {
   resource_group_name  = var.resource_group_name      # Groupe de ressources Azure.
   virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent.
   address_prefixes     = ["10.0.1.0/24"]              # Plage d'adresses spécifique pour ce sous-réseau.
+  delegation {
+    name = "delegation-for-app-service"
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action"
+      ]
+    }
+  }
 }
 
 # Ressource : Sous-réseau pour le stockage
@@ -35,7 +44,7 @@ resource "azurerm_subnet" "database_subnet" {
 
   # Délégation pour PostgreSQL Flexible Server
   delegation {
-    name = "delegation-for-postgresql"               # Nom de la délégation.
+    name = "delegation-for-postgresql"               # Nom de la délégation
     service_delegation {
       name = "Microsoft.DBforPostgreSQL/flexibleServers" # Service délégué pour PostgreSQL Flexible Server.
       actions = [

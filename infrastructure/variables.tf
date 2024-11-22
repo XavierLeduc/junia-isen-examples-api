@@ -98,3 +98,33 @@ variable "docker_image" {
     description = "L'image Docker a deployé"
     type        = string
 }
+
+variable "blob_subnet_id" {
+  description = "ID du subnet pour le Blob Storage Private Endpoint"
+  type        = string
+}
+
+variable "storage_account_id" {
+  description = "ID du compte de stockage Blob"
+  type        = string
+}
+
+variable "db_subnet_id" {
+  description = "ID du subnet pour le PostgreSQL Private Endpoint"
+  type        = string
+}
+
+variable "postgresql_server_id" {
+  description = "ID du serveur PostgreSQL"
+  type        = string
+}
+
+variable "app_subnet_id" {
+  description = "ID du subnet pour l'App Service Private Endpoint"
+  type        = string
+}
+
+variable "app_service_id" {
+  description = "ID du App Service"
+  type        = string
+}
