@@ -93,3 +93,8 @@ variable "database_name" {
   type        = string
   default     = "junia-exedb"
 }
+
+variable "docker_image" {
+    description = "L'image Docker a deployé"
+    type        = string
+}

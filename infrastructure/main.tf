@@ -36,6 +36,7 @@ module "app_service" {
   location              = var.location
   app_name              = "${var.app_name}-${random_id.unique_suffix.hex}"
   app_service_plan_name = "${var.app_service_plan_name}-${random_id.unique_suffix.hex}"
+  docker_image          = var.docker_image
 }
 
 # Storage Module
@@ -61,3 +62,5 @@ module "database" {
   subnet_id               = module.network.database_subnet_id
   vnet_id                 = module.network.vnet_id
 }
+
+

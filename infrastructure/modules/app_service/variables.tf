@@ -29,3 +29,8 @@ variable "resource_group_name" {
   description = "Nom du groupe de ressources Azure qui contiendra les ressources déployées."
   type        = string
 }
+
+variable "docker_image" {
+  description = "L'image Docker à déployer dans l'App Service"
+  type        = string
+}
