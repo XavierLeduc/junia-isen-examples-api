@@ -29,3 +29,13 @@ variable "resource_group_name" {
   description = "Nom du groupe de ressources Azure qui contiendra les ressources déployées."
   type        = string
 }
+
+variable "app_subnet_id" {
+  description = "ID du subnet pour l'App Service Private Endpoint"
+  type        = string
+}
+
+variable "app_service_id" {
+  description = "ID du App Service"
+  type        = string
+}

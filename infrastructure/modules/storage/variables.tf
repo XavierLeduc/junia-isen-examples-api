@@ -29,3 +29,14 @@ variable "container_name" {
   description = "Nom du conteneur blob dans le compte de stockage Azure."
   type        = string
 }
+
+variable "blob_subnet_id" {
+  description = "ID du subnet pour le Blob Storage Private Endpoint"
+  type        = string
+}
+
+variable "storage_account_id" {
+  description = "ID du compte de stockage Blob"
+  type        = string
+}
+

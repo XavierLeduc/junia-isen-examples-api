@@ -27,3 +27,22 @@ resource "azurerm_app_service" "app_service" {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"              # Désactive le stockage local App Service si non requis.
   }
 }
+
+resource "azurerm_private_endpoint" "app_service_private_endpoint" {
+  name                = "app-service-private-endpoint"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.app_subnet_id
+
+  private_service_connection {
+    name                           = "app-service-connection"
+    private_connection_resource_id = var.app_service_id
+    is_manual_connection           = false
+    subresource_names              = ["sites"]
+  }
+}
+
+resource "azurerm_app_service_virtual_network_swift_connection" "vnet_integration" {
+  app_service_id = var.app_service_id
+  subnet_id      = var.app_subnet_id
+}
