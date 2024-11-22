@@ -75,6 +75,7 @@ jobs:
                     #to deploy the infrastructure on the cloud
 
     deploy_application: # Nouveau job pour le déploiement
+        name: Deploy application with Terraform
         needs: build_docker_image # Dépend du job précédent
         runs-on: ubuntu-latest
         steps:
@@ -87,12 +88,15 @@ jobs:
                 terraform_version: 1.9.8 # Version de Terraform
 
             - name: Initialize Terraform
+              working-directory: ./infrastructure/.terraform
               run: terraform init
 
             - name: Plan Terraform changes
+              working-directory: ./infrastructure/.terraform
               run: terraform plan -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
             - name: Apply Terraform changes
+              working-directory: ./infrastructure/.terraform
               run: terraform apply -auto-approve -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
 
