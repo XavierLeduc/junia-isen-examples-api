@@ -30,6 +30,10 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "docker_image" {
+  description = "L'image Docker à déployer dans l'App Service"
+}
+
 variable "app_subnet_id" {
   description = "ID du subnet pour l'App Service Private Endpoint"
   type        = string

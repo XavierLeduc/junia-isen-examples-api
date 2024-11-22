@@ -17,9 +17,9 @@ resource "azurerm_app_service" "app_service" {
   app_service_plan_id = azurerm_service_plan.app_service_plan.id # ID du plan de service lié.
 
   # Configuration du site (pour les applications Linux Docker ici).
-  site_config {
-    linux_fx_version = "DOCKER|mcr.microsoft.com/dotnet/aspnet:6.0" # Image Docker utilisée (exemple: ASP.NET Core 6.0).
-  }
+ site_config {
+  linux_fx_version = "DOCKER|${var.docker_image}" # Utilise la variable docker_image
+}
 
   # Paramètres de l'application.
   # Ajoutez d'autres paramètres si nécessaire pour votre application.
