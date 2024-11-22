@@ -51,11 +51,11 @@ admin_password = "SuperSecurePassword123" # Assurez-vous de sécuriser cette var
 # Nom de la base de données créée par défaut sur le serveur PostgreSQL.
 database_name = "junia-exedb12"
 
-blob_subnet_id      = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/storage-subnet"
-storage_account_id  = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Storage/storageAccounts/juniaexestorageacct12"
+blob_subnet_id      = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/storage-subnet"
+storage_account_id  = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Storage/storageAccounts/juniaexestorageacct12"
 
-db_subnet_id        = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/database-subnet"
-postgresql_server_id = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.DBforPostgreSQL/flexibleServers/junia-exe-postgresql-server12"
+db_subnet_id        = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/database-subnet"
+postgresql_server_id = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.DBforPostgreSQL/flexibleServers/junia-exe-postgresql-server12"
 
-app_subnet_id       = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/app-subnet"
-app_service_id      = "/subscriptions/3586831e-0b85-4e41-842d-a48ee598d1fd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Web/sites/junia-exe-app-service12"
+app_subnet_id       = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/app-subnet"
+app_service_id      = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Web/sites/junia-exe-app-service12"
