@@ -52,3 +52,8 @@ variable "database_subnet_name" {
   type        = string
   default     = "database-subnet"                     # Nom par défaut pour une utilisation standard.
 }
+
+variable "random_suffix" {
+  description = "Suffixe aléatoire pour rendre les noms uniques"
+  type        = string
+}

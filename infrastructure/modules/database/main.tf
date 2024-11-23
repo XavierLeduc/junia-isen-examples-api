@@ -5,8 +5,8 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   name                = var.postgresql_server_name                 # Nom unique du serveur PostgreSQL.
   location            = var.location                               # Région Azure pour le déploiement.
   resource_group_name = var.resource_group_name                    # Groupe de ressources Azure.
-  sku_name            = "B_Standard_B1ms"                         # SKU : Niveau de calcul choisi pour le serveur.
-  storage_mb          = 32768                                     # Espace de stockage alloué (32 Go ici).
+  sku_name            = "B_Standard_B2s"                         # SKU : Niveau de calcul choisi pour le serveur.
+  storage_mb          = 32768                                    # Espace de stockage alloué (32 Go ici).
   version             = "13"                                      # Version de PostgreSQL (exemple : 13).
   administrator_login = var.admin_username                        # Identifiant administrateur pour le serveur.
   administrator_password = var.admin_password                     # Mot de passe administrateur sécurisé.
@@ -21,7 +21,6 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   }
   high_availability {
     mode                     = "ZoneRedundant"
-    standby_availability_zone = "2"
   }
 }
 

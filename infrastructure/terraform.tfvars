@@ -9,7 +9,7 @@ resource_group_name = "junia-exe-ressource-xavier"
 # Région Azure
 # Spécifie la région où toutes les ressources seront déployées.
 # Exemple : "North Europe" pour les serveurs situés en Europe du Nord.
-location = "North Europe"
+location = "Brazil Us"
 
 # Nom du réseau virtuel (VNet)
 # Le réseau virtuel Azure qui connecte toutes les ressources de manière sécurisée.
@@ -21,11 +21,11 @@ address_space = ["10.0.0.0/16"]
 
 # Nom du service applicatif (App Service)
 # Détermine le nom unique de l'App Service dans Azure.
-app_name = "junia-exe-app-service12"
+app_name = "junia-exe-app-service"
 
 # Nom du plan de service App Service
 # Définit le plan de service utilisé par l'App Service pour ses ressources de calcul.
-app_service_plan_name = "junia-exe-app-service-plan12"
+app_service_plan_name = "junia-exe-app-service-plan"
 
 # Nom du compte de stockage
 # Le compte de stockage utilisé pour héberger des blobs ou d'autres ressources.

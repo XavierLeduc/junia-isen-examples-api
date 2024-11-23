@@ -1,10 +1,10 @@
 # Ressource : Réseau Virtuel (VNet)
 # Crée un réseau virtuel Azure (VNet) pour connecter toutes les ressources de manière sécurisée.
 resource "azurerm_virtual_network" "vnet" {
-  name                = var.vnet_name                 # Nom du VNet.
-  location            = var.location                  # Région Azure où le VNet sera déployé.
-  resource_group_name = var.resource_group_name       # Groupe de ressources Azure.
-  address_space       = var.address_space            # Plage d'adresses CIDR utilisée pour le VNet.
+  name                = "${var.vnet_name}-${var.random_suffix}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  address_space       = var.address_space
 }
 
 # Ressource : Sous-réseau pour les applications
@@ -52,4 +52,11 @@ resource "azurerm_subnet" "database_subnet" {
       ]
     }
   }
+}
+
+resource "azurerm_subnet" "private_endpoint_subnet" {
+  name                 = "private-endpoint-subnet"         # Nom du nouveau sous-réseau
+  resource_group_name  = var.resource_group_name           # Groupe de ressources Azure
+  virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent
+  address_prefixes     = ["10.0.4.0/24"]                   # Plage d'adresses spécifique (assurez-vous qu'elle ne chevauche pas d'autres sous-réseaux)
 }

@@ -22,11 +22,14 @@ resource "azurerm_resource_group" "resource_group" {
 # Module pour configurer le réseau, incluant le VNet et les sous-réseaux associés.
 module "network" {
   source              = "./modules/network"
-  vnet_name           = "${var.vnet_name}-${random_id.unique_suffix.hex}"
+  vnet_name           = var.vnet_name
   address_space       = var.address_space
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
+  random_suffix       = random_id.unique_suffix.hex
 }
+
+
 
 # App Service Module
 # Module pour déployer un service applicatif Azure (App Service).
@@ -37,10 +40,14 @@ module "app_service" {
   app_name              = "${var.app_name}-${random_id.unique_suffix.hex}"
   app_service_plan_name = "${var.app_service_plan_name}-${random_id.unique_suffix.hex}"
   docker_image          = var.docker_image
-
-  app_subnet_id         = local.app_subnet_id
-  app_service_id        = local.app_service_id
+  app_subnet_id         = module.network.app_subnet_id
+  vnet_name             = module.network.vnet_name
+  app_service_id        = module.app_service.app_service_id  # Passez l'ID de l'App Service
+  vnet_id               = module.network.vnet_id  # Passez l'ID du VNet
+  private_endpoint_subnet_id = module.network.private_endpoint_subnet_id # Passez le sous-réseau des Private Endpoints
 }
+
+
 
 # Storage Module
 # Module pour configurer un compte de stockage et un conteneur blob.
@@ -68,8 +75,8 @@ module "database" {
   subnet_id               = module.network.database_subnet_id
   vnet_id                 = module.network.vnet_id
 
-  db_subnet_id            = local.db_subnet_id
-  postgresql_server_id    = local.postgresql_server_id
+  db_subnet_id            = module.network.database_subnet_id
+  postgresql_server_id    = module.database.postgresql_server_id
 }
 
 

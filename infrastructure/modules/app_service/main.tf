@@ -29,21 +29,23 @@ resource "azurerm_app_service" "app_service" {
 }
 
 resource "azurerm_private_endpoint" "app_service_private_endpoint" {
-  depends_on = [azurerm_service_plan.app_service_plan]
   name                = "app-service-private-endpoint"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = var.app_subnet_id
+  subnet_id           = var.private_endpoint_subnet_id # Utilisez le sous-réseau dédié
 
   private_service_connection {
     name                           = "app-service-connection"
-    private_connection_resource_id = var.app_service_id
+    private_connection_resource_id = azurerm_app_service.app_service.id
     is_manual_connection           = false
     subresource_names              = ["sites"]
   }
 }
 
+
 resource "azurerm_app_service_virtual_network_swift_connection" "vnet_integration" {
-  app_service_id = var.app_service_id
-  subnet_id      = var.app_subnet_id
+  app_service_id = azurerm_app_service.app_service.id
+  subnet_id      = var.app_subnet_id # Utilisation de vnet_id
 }
+
+

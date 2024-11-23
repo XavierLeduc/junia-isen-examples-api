@@ -43,3 +43,20 @@ variable "app_service_id" {
   description = "ID du App Service"
   type        = string
 }
+
+
+variable "vnet_name" {
+  description = "Nom du Virtual Network (VNet)"
+  type        = string
+}
+
+
+variable "vnet_id" {
+  description = "L'ID du Virtual Network (VNet)"
+  type        = string
+}
+
+variable "private_endpoint_subnet_id" {
+  description = "ID du sous-réseau dédié aux Private Endpoints"
+  type        = string
+}
