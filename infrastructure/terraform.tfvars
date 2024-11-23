@@ -9,7 +9,7 @@ resource_group_name = "junia-exe-ressource-xavier"
 # Région Azure
 # Spécifie la région où toutes les ressources seront déployées.
 # Exemple : "North Europe" pour les serveurs situés en Europe du Nord.
-location = "centralus"
+location = "France Central"
 
 # Nom du réseau virtuel (VNet)
 # Le réseau virtuel Azure qui connecte toutes les ressources de manière sécurisée.
