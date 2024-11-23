@@ -19,9 +19,9 @@ resource "azurerm_postgresql_flexible_server" "postgresql" {
   tags = {
     environment = "Production"                                    # Tags pour l'organisation et la gestion des ressources.
   }
-  high_availability {
+  /*high_availability {
     mode                     = "ZoneRedundant"
-  }
+  }*/
 }
 
 #Ressource : Base de données PostgreSQL
