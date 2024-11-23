@@ -44,7 +44,6 @@ module "app_service" {
   vnet_name             = module.network.vnet_name
   app_service_id        = module.app_service.app_service_id  # Passez l'ID de l'App Service
   vnet_id               = module.network.vnet_id  # Passez l'ID du VNet
-  private_endpoint_subnet_id = module.network.private_endpoint_subnet_id # Passez le sous-réseau des Private Endpoints
 }
 
 

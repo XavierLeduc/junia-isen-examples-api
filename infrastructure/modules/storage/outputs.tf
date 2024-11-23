@@ -26,7 +26,4 @@ output "container_url" {
   value = azurerm_storage_container.storage_container.id
 }
 
-output "blob_private_endpoint_ip" {
-  description = "Adresse IP privée du Private Endpoint pour le Blob Storage"
-  value       = azurerm_private_endpoint.blob_private_endpoint.private_service_connection[0].private_ip_address
-}
+

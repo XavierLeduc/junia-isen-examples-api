@@ -56,7 +56,3 @@ variable "vnet_id" {
   type        = string
 }
 
-variable "private_endpoint_subnet_id" {
-  description = "ID du sous-réseau dédié aux Private Endpoints"
-  type        = string
-}

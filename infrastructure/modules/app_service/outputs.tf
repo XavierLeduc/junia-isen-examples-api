@@ -11,8 +11,4 @@ output "app_service_id" {
   value = azurerm_app_service.app_service.id
 }
 
-output "app_service_private_endpoint_ip" {
-  description = "Adresse IP privée du Private Endpoint pour l'App Service"
-  value       = azurerm_private_endpoint.app_service_private_endpoint.private_service_connection[0].private_ip_address
-}
 

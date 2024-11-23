@@ -54,9 +54,3 @@ resource "azurerm_subnet" "database_subnet" {
   }
 }
 
-resource "azurerm_subnet" "private_endpoint_subnet" {
-  name                 = "private-endpoint-subnet"         # Nom du nouveau sous-réseau
-  resource_group_name  = var.resource_group_name           # Groupe de ressources Azure
-  virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent
-  address_prefixes     = ["10.0.4.0/24"]                   # Plage d'adresses spécifique (assurez-vous qu'elle ne chevauche pas d'autres sous-réseaux)
-}
