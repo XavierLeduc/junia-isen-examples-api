@@ -1,6 +1,6 @@
 # ID de l'abonnement Azure
 # Utilisé pour identifier l'abonnement dans lequel les ressources seront créées.
-subscription_id = "3c96b4c4-ced5-4fb1-9e04-d1bae26448dd"
+subscription_id = "0e2289e6-99f2-4e54-b3ba-47212bcdd42e"
 
 # Nom du groupe de ressources
 # Groupe Azure qui regroupe logiquement toutes les ressources associées à ce projet.
