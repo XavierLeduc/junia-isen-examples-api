@@ -37,8 +37,9 @@ module "app_service" {
   app_name              = "${var.app_name}-${random_id.unique_suffix.hex}"
   app_service_plan_name = "${var.app_service_plan_name}-${random_id.unique_suffix.hex}"
   docker_image          = var.docker_image
-  app_subnet_id         = var.app_subnet_id
-  app_service_id        = var.app_service_id
+
+  app_subnet_id         = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["app"]}"
+  app_service_id        = "${local.base_path}/Microsoft.Web/sites/${var.app_service_plan_name}"
 }
 
 # Storage Module
@@ -49,8 +50,9 @@ module "blob_storage" {
   container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
-  blob_subnet_id        = var.blob_subnet_id
-  storage_account_id    = var.storage_account_id
+
+  blob_subnet_id        = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["blob"]}"
+  storage_account_id    = "${local.base_path}/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
 }
 
 # Database Module
@@ -65,8 +67,13 @@ module "database" {
   database_name           = "${var.database_name}-${random_id.unique_suffix.hex}"
   subnet_id               = module.network.database_subnet_id
   vnet_id                 = module.network.vnet_id
-  db_subnet_id            = var.db_subnet_id
-  postgresql_server_id    = var.postgresql_server_id
+
+  db_subnet_id            = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["database"]}"
+  postgresql_server_id    = "${local.base_path}/Microsoft.DBforPostgreSQL/flexibleServers/${var.postgresql_server_name}"
 }
 
+
+locals {
+  base_path = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers"
+}
 

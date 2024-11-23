@@ -59,3 +59,5 @@ postgresql_server_id = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/reso
 
 app_subnet_id       = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Network/virtualNetworks/junia-exe-vnet12/subnets/app-subnet"
 app_service_id      = "/subscriptions/3c96b4c4-ced5-4fb1-9e04-d1bae26448dd/resourceGroups/junia-exe-ressource-group12/providers/Microsoft.Web/sites/junia-exe-app-service12"
+
+

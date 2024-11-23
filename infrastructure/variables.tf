@@ -128,3 +128,7 @@ variable "app_service_id" {
   description = "ID du App Service"
   type        = string
 }
+
+variable "subnets" {
+  type = map(string)
+}
