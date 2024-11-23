@@ -29,6 +29,7 @@ resource "azurerm_app_service" "app_service" {
 }
 
 resource "azurerm_private_endpoint" "app_service_private_endpoint" {
+  depends_on = [azurerm_service_plan.app_service_plan]
   name                = "app-service-private-endpoint"
   location            = var.location
   resource_group_name = var.resource_group_name
