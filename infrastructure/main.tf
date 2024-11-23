@@ -38,8 +38,8 @@ module "app_service" {
   app_service_plan_name = "${var.app_service_plan_name}-${random_id.unique_suffix.hex}"
   docker_image          = var.docker_image
 
-  app_subnet_id         = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["app"]}"
-  app_service_id        = "${local.base_path}/Microsoft.Web/sites/${var.app_service_plan_name}"
+  app_subnet_id         = local.app_subnet_id
+  app_service_id        = local.app_service_id
 }
 
 # Storage Module
@@ -51,8 +51,8 @@ module "blob_storage" {
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
 
-  blob_subnet_id        = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["blob"]}"
-  storage_account_id    = "${local.base_path}/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
+  blob_subnet_id        = local.blob_subnet_id
+  storage_account_id    = local.storage_account_id
 }
 
 # Database Module
@@ -68,12 +68,23 @@ module "database" {
   subnet_id               = module.network.database_subnet_id
   vnet_id                 = module.network.vnet_id
 
-  db_subnet_id            = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}/subnets/${var.subnets["database"]}"
-  postgresql_server_id    = "${local.base_path}/Microsoft.DBforPostgreSQL/flexibleServers/${var.postgresql_server_name}"
+  db_subnet_id            = local.db_subnet_id
+  postgresql_server_id    = local.postgresql_server_id
 }
 
 
 locals {
-  base_path = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers"
-}
+  base_path       = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers"
+  vnet_path       = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}"
+  storage_path    = "${local.base_path}/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
+  postgresql_path = "${local.base_path}/Microsoft.DBforPostgreSQL/flexibleServers/${var.postgresql_server_name}"
+  app_service_path = "${local.base_path}/Microsoft.Web/sites/${var.app_service_plan_name}"
 
+  # Chemins spécifiques
+  blob_subnet_id       = "${local.vnet_path}/subnets/storage-subnet"
+  storage_account_id   = "${local.storage_path}"
+  db_subnet_id         = "${local.vnet_path}/subnets/database-subnet"
+  postgresql_server_id = "${local.postgresql_path}"
+  app_subnet_id        = "${local.vnet_path}/subnets/app-subnet"
+  app_service_id       = "${local.app_service_path}"
+}
