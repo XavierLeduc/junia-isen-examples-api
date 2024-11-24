@@ -63,12 +63,12 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
 resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
-    PGPASSWORD=${var.admin_password} psql \
-      -h ${var.postgresql_server_name}.postgres.database.azure.com \
-      -p 5432 \
-      -U ${var.admin_username} \
-      -d ${var.database_name} \
-      -c "CREATE TABLE IF NOT EXISTS examples (id SERIAL PRIMARY KEY, description TEXT); INSERT INTO examples (description) VALUES ('Hello world!') ON CONFLICT DO NOTHING;"
+      PGPASSWORD=${var.admin_password} psql \
+        --host=${azurerm_postgresql_flexible_server.postgresql.fqdn} \
+        --port=5432 \
+        --username=${var.admin_username}@${azurerm_postgresql_flexible_server.postgresql.name} \
+        --dbname=${azurerm_postgresql_flexible_server_database.database.name} \
+        -f ${path.module}/script.sql
     EOT
     environment = {
       PGPASSWORD = var.admin_password
