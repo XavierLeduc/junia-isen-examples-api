@@ -82,10 +82,22 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
+
             - name: Login to Azure
               uses: azure/login@v1
               with: 
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+            - name: Vérification des permissions Azure
+              run: |
+                az role assignment list --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+            - name: Attribuer les permissions nécessaires
+              run: |
+                az role assignment create \
+                  --assignee ${{ secrets.AZURE_CLIENT_ID }} \
+                  --role "Owner" \
+                  --scope /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v2
