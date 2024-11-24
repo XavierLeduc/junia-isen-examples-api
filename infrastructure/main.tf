@@ -32,7 +32,6 @@ module "network" {
 
 
 # App Service Module
-# Module pour déployer un service applicatif Azure (App Service).
 module "app_service" {
   source                = "./modules/app_service"
   resource_group_name   = azurerm_resource_group.resource_group.name
@@ -40,30 +39,34 @@ module "app_service" {
   app_name              = "${var.app_name}-${random_id.unique_suffix.hex}"
   app_service_plan_name = "${var.app_service_plan_name}-${random_id.unique_suffix.hex}"
   docker_image          = var.docker_image
+
+  # Pass required arguments from the network and storage modules
   app_subnet_id         = module.network.app_subnet_id
   vnet_name             = module.network.vnet_name
-  app_service_id        = module.app_service.app_service_id
   vnet_id               = module.network.vnet_id
-
-  storage_account_url   = module.blob_storage.storage_container_url
-  storage_account_id    = module.blob_storage.storage_account_id # Ajout de cette ligne
   storage_subnet_id     = module.network.storage_subnet_id
+  storage_account_url   = module.blob_storage.storage_account_url
+  storage_account_id    = module.blob_storage.storage_account_id
 }
-
 
 
 
 # Storage Module
-# Module pour configurer un compte de stockage et un conteneur blob.
 module "blob_storage" {
   source                = "./modules/storage"
   storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24)
-  container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"
+  container_name        = var.container_name
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
-  blob_subnet_id        = module.network.storage_subnet_id # Utilise l'ID du sous-réseau exposé par le module réseau
+  blob_subnet_id        = module.network.storage_subnet_id
 }
 
+# Local values referencing correct outputs
+locals {
+  storage_account_name = module.blob_storage.storage_account_name
+  storage_account_url  = module.blob_storage.storage_account_url
+  container_url        = module.blob_storage.container_url
+}
 # Database Module
 # Module pour configurer un serveur PostgreSQL Flexible et une base de données.
 module "database" {

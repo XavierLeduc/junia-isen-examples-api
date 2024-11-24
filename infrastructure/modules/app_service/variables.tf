@@ -39,10 +39,7 @@ variable "app_subnet_id" {
   type        = string
 }
 
-variable "app_service_id" {
-  description = "ID du App Service"
-  type        = string
-}
+
 
 
 variable "vnet_name" {
@@ -70,3 +67,5 @@ variable "storage_subnet_id" {
   description = "ID du sous-réseau de stockage"
   type        = string
 }
+
+

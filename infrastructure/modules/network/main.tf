@@ -10,40 +10,26 @@ resource "azurerm_virtual_network" "vnet" {
 # Ressource : Sous-réseau pour les applications
 # Sous-réseau dédié aux services applicatifs, comme Azure App Service.
 resource "azurerm_subnet" "app_subnet" {
-  name                 = var.app_subnet_name          # Nom du sous-réseau.
-  resource_group_name  = var.resource_group_name      # Groupe de ressources Azure.
-  virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent.
-  address_prefixes     = ["10.0.1.0/24"]              # Plage d'adresses spécifique pour ce sous-réseau.
+  name                 = "app-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.1.0/24"]
+
   delegation {
     name = "delegation-for-app-service"
     service_delegation {
       name    = "Microsoft.Web/serverFarms"
-      actions = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action"
-      ]
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
   }
 }
-
 # Ressource : Sous-réseau pour le stockage
 # Sous-réseau dédié aux ressources de stockage, comme Azure Storage Account.
 resource "azurerm_subnet" "storage_subnet" {
-  name                 = var.storage_subnet_name      # Nom du sous-réseau.
-  resource_group_name  = var.resource_group_name      # Groupe de ressources Azure.
-  virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent.
-  address_prefixes     = ["10.0.2.0/24"]              # Plage d'adresses spécifique pour ce sous-réseau.
-
-  service_endpoints = ["Microsoft.Storage"]
-
-  delegation {
-  name = "delegation-for-app-service"
-  service_delegation {
-    name    = "Microsoft.Web/serverFarms"
-    actions = [
-      "Microsoft.Network/virtualNetworks/subnets/join/action"
-    ]
-    }
-  }
+  name                 = "storage-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.2.0/24"]
 }
 
 
