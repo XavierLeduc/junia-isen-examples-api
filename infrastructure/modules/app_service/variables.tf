@@ -69,3 +69,23 @@ variable "storage_subnet_id" {
 }
 
 
+variable "postgresql_server_name" {
+  description = "Nom du serveur PostgreSQL"
+  type        = string
+}
+
+variable "database_name" {
+  description = "Nom de la base de données PostgreSQL"
+  type        = string
+}
+
+variable "admin_username" {
+  description = "Nom d'utilisateur administrateur PostgreSQL"
+  type        = string
+}
+
+variable "admin_password" {
+  description = "Mot de passe administrateur PostgreSQL"
+  type        = string
+  sensitive   = true
+}

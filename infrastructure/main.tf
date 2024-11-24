@@ -47,6 +47,12 @@ module "app_service" {
   storage_subnet_id     = module.network.storage_subnet_id
   storage_account_url   = module.blob_storage.storage_account_url
   storage_account_id    = module.blob_storage.storage_account_id
+
+  # Variables PostgreSQL
+  postgresql_server_name = module.database.postgresql_server_name
+  database_name          = module.database.database_name
+  admin_username         = var.admin_username
+  admin_password         = var.admin_password
 }
 
 
@@ -59,13 +65,6 @@ module "blob_storage" {
   resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
   blob_subnet_id        = module.network.storage_subnet_id
-}
-
-# Local values referencing correct outputs
-locals {
-  storage_account_name = module.blob_storage.storage_account_name
-  storage_account_url  = module.blob_storage.storage_account_url
-  container_url        = module.blob_storage.container_url
 }
 # Database Module
 # Module pour configurer un serveur PostgreSQL Flexible et une base de données.

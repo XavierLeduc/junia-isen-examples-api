@@ -59,3 +59,20 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
   server_id           = var.postgresql_server_id
 
 }
+
+resource "null_resource" "initialize_database" {
+  provisioner "local-exec" {
+    command = <<EOT
+    PGPASSWORD=${var.admin_password} psql \
+      -h ${var.postgresql_server_name}.postgres.database.azure.com \
+      -p 5432 \
+      -U ${var.admin_username} \
+      -d ${var.database_name} \
+      -c "CREATE TABLE IF NOT EXISTS examples (id SERIAL PRIMARY KEY, description TEXT); INSERT INTO examples (description) VALUES ('Hello world!') ON CONFLICT DO NOTHING;"
+    EOT
+    environment = {
+      PGPASSWORD = var.admin_password
+    }
+  }
+  depends_on = [azurerm_postgresql_flexible_server_database.database]
+}
