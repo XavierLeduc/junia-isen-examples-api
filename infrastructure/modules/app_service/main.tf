@@ -35,7 +35,7 @@ resource "azurerm_app_service" "app_service" {
 
 resource "azurerm_app_service_virtual_network_swift_connection" "vnet_integration" {
   app_service_id = azurerm_app_service.app_service.id
-  subnet_id      = var.app_subnet_id # Utilisation de vnet_id
+  subnet_id      = module.network.storage_subnet_id # Assurez-vous que cela pointe vers le sous-réseau correct
 }
 
 resource "azurerm_role_assignment" "app_service_storage_access" {
@@ -43,5 +43,6 @@ resource "azurerm_role_assignment" "app_service_storage_access" {
   role_definition_name = "Storage Blob Data Reader"
   scope                = var.storage_account_id
 }
+
 
 

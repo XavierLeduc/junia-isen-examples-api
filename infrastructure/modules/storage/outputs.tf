@@ -31,5 +31,7 @@ output "storage_account_url" {
   value = azurerm_storage_account.storage_account.primary_blob_endpoint
 }
 
-
+output "storage_account_key" {
+  value = azurerm_storage_account.storage_account.primary_access_key
+}
 
