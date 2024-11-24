@@ -81,32 +81,45 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
-      
+
+
             - name: Login to Azure
               uses: azure/login@v1
-              with:
+              with: 
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
-            - name: Vérification des permissions Azure
+
+            - name: Debug secrets
               run: |
-                az role assignment list --assignee $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId') --scope /subscriptions/$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')
-      
+                echo "Checking AZURE_CREDENTIALS"
+                echo "AZURE_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId')"
+                echo "AZURE_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')"
+
+            - name: Attribuer les permissions nécessaires
+              run: |
+                az role assignment create \
+                  --assignee ${{ secrets.AZURE_CLIENT_ID }} \
+                  --role "Owner" \
+                  --scope /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v2
               with:
-                terraform_version: 1.9.8
-      
+                terraform_version: 1.9.8 # Version de Terraform
+
             - name: Initialize Terraform
               working-directory: ./infrastructure
               run: terraform init
-      
+
             - name: Plan Terraform changes
               working-directory: ./infrastructure
-              run: terraform plan
-      
+              run: terraform plan -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+
             - name: Apply Terraform changes
               working-directory: ./infrastructure
-              run: terraform apply -auto-approve
+              run: terraform apply -auto-approve -var "docker_image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+
+
+              
 
 
 
