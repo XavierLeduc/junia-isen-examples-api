@@ -63,6 +63,7 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
 resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
+      sleep 60
       PGPASSWORD=${var.admin_password} psql \
         --host=${azurerm_postgresql_flexible_server.postgresql.fqdn} \
         --port=5432 \
