@@ -32,6 +32,8 @@ resource "azurerm_subnet" "storage_subnet" {
   resource_group_name  = var.resource_group_name      # Groupe de ressources Azure.
   virtual_network_name = azurerm_virtual_network.vnet.name # Nom du VNet parent.
   address_prefixes     = ["10.0.2.0/24"]              # Plage d'adresses spécifique pour ce sous-réseau.
+
+  service_endpoints = ["Microsoft.Storage"]
 }
 
 # Ressource : Sous-réseau pour la base de données

@@ -16,6 +16,7 @@ resource "azurerm_storage_account_network_rules" "blob_network_rules" {
   storage_account_id         = azurerm_storage_account.storage_account.id # Référence au compte de stockage créé
   default_action             = "Deny"                                    # Action par défaut pour les règles réseau
   virtual_network_subnet_ids = [var.blob_subnet_id]                      # ID du sous-réseau passé en variable
+  
 
   depends_on = [azurerm_storage_account.storage_account]                 # S'assurer que le compte de stockage est créé
 }

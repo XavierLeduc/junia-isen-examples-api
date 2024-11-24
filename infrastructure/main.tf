@@ -52,11 +52,11 @@ module "app_service" {
 # Module pour configurer un compte de stockage et un conteneur blob.
 module "blob_storage" {
   source                = "./modules/storage"
-  storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24) # Nom unique
-  container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"                     # Nom du conteneur
-  resource_group_name   = azurerm_resource_group.resource_group.name                                 # Passe le groupe de ressources complet
-  location              = var.location                                                              # Région Azure
-  blob_subnet_id        = module.network.storage_subnet_id                                          # Sous-réseau pour les règles réseau
+  storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24)
+  container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"
+  resource_group_name   = azurerm_resource_group.resource_group.name
+  location              = var.location
+  blob_subnet_id        = module.network.storage_subnet_id # Utilise l'ID du sous-réseau exposé par le module réseau
 }
 
 # Database Module
