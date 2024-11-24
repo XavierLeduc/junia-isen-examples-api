@@ -74,3 +74,4 @@ variable "postgresql_server_id" {
   description = "ID du serveur PostgreSQL"
   type        = string
 }
+

@@ -44,10 +44,10 @@ resource "azurerm_private_dns_zone" "postgresql_dns_zone" {
 # Ressource : Lien entre la zone DNS privée et le réseau virtuel
 # Cette ressource associe la zone DNS privée PostgreSQL Flexible Server au réseau virtuel.
 resource "azurerm_private_dns_zone_virtual_network_link" "dns_zone_link" {
-  name                  = "postgresql-private-dns-vnet-link"       # Nom unique pour le lien DNS privé.
-  resource_group_name   = var.resource_group_name                  # Groupe de ressources Azure.
-  private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns_zone.name # Nom de la zone DNS privée.
-  virtual_network_id    = var.vnet_id                              # ID du réseau virtuel auquel lier la zone DNS.
+  name                  = "postgresql-private-dns-vnet-link"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns_zone.name
+  virtual_network_id    = var.vnet_id
 }
 
 
@@ -63,7 +63,7 @@ resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
       echo "Waiting for DNS and network propagation..."
-      sleep 120
+      sleep 180
       echo "Testing DNS resolution..."
       nslookup ${azurerm_postgresql_flexible_server.postgresql.fqdn} || exit 1
       echo "Testing connectivity to PostgreSQL server..."
@@ -80,8 +80,5 @@ resource "null_resource" "initialize_database" {
       PGPASSWORD = var.admin_password
     }
   }
-  depends_on = [
-    azurerm_postgresql_flexible_server_database.database,
-    azurerm_private_dns_zone_virtual_network_link.dns_zone_link
-  ]
+  depends_on = [azurerm_postgresql_flexible_server_database.database]
 }
