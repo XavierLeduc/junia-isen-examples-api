@@ -26,6 +26,8 @@ output "vnet_id" {
   value = azurerm_virtual_network.vnet.id
 }
 
+# Sortie : Nom du réseau virtuel (VNet)
+# Fournit le nom du réseau virtuel Azure (VNet).
 output "vnet_name" {
   value = azurerm_virtual_network.vnet.name
 }

@@ -39,14 +39,14 @@ jobs:
             - name: Running unit tests #Lance les tests situés dans ".tests/" avec pytest
               run: uv run pytest tests/
 
-    build_docker_image: #Construit une image Docker et publie sur GHCR 
+    build_docker_image: #Construit une image Docker et publie sur Git
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile' 
         runs-on: ubuntu-latest #Utilisation d'ubuntu-latest
         steps: 
             - name: Checkout repository #Télécharge le code du dépôt
               uses: actions/checkout@v3
 
-            - name: Log in to the Container registry #Connexion à GitHub Packages
+            - name: Log in to the Container registry #Connexion à GitHub Packages avec le compte de l'utilisateur
               uses: docker/login-action@v2    
               with:
                 registry: ${{ env.REGISTRY }}
@@ -58,7 +58,7 @@ jobs:
               uses: docker/metadata-action@v3
               with:
                   images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-                  tags: | #Associe un tag à la branche, chaque image unique avec le SHA, tag "latest" pour la version la plus récente
+                  tags: | #Associe un tag à la branche, chaque image unique avec le tag "latest" pour la version la plus récente
                     type=ref,event=branch 
                     type=sha
                     type=raw,value=latest
@@ -71,7 +71,7 @@ jobs:
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
 
-    deploy_application: # Nouveau job pour le déploiement
+    deploy_application: # Nouveau job pour le déploiement de l'appli avec la nouvelle version de l'IMG
         name: Deploy application with Terraform
         needs: build_docker_image # Dépend du job précédent
         runs-on: ubuntu-latest
@@ -79,31 +79,31 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
-            - name: Login to Azure
+            - name: Login to Azure #Auth à Azure avec les id persos stockés dans "SECRETS"
               uses: azure/login@v1
               with: 
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-            - name: Debug secrets
+            - name: Debug secrets #Vérif des variables Azure
               run: |
                 echo "Checking AZURE_CREDENTIALS"
                 echo "Extracted AZURE_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId')"
                 echo "Extracted AZURE_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')"
                 echo "Extracted AZURE_TENANT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.tenantId')"
 
-            - name: Assign necessary permissions
+            - name: Assign necessary permissions #Donne les permissions nécessaires à Azure
               run: |
                 az role assignment create \
                   --assignee $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId') \
                   --role "Owner" \
                   --scope /subscriptions/$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')
 
-            - name: Setup Terraform
+            - name: Setup Terraform   #Utilisation de Terraform pour init, plan et apply
               uses: hashicorp/setup-terraform@v2
               with:
                 terraform_version: 1.9.8 # Version de Terraform
 
-            - name: Convert image name to lowercase
+            - name: Convert image name to lowercase #Nécessaires pour les registres Docker
               run: echo "DOCKER_IMAGE=${{ env.REGISTRY }}/$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]'):latest" >> $GITHUB_ENV
 
             - name: Initialize Terraform

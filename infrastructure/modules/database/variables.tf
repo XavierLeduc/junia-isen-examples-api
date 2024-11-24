@@ -63,11 +63,13 @@ variable "vnet_id" {
   type        = string
 }
 
+# Variable définissant ID du sous réseau
 variable "db_subnet_id" {
   description = "ID du subnet pour le PostgreSQL Private Endpoint"
   type        = string
 }
 
+# Varaible définissant l'ID du serveur Postgre
 variable "postgresql_server_id" {
   description = "ID du serveur PostgreSQL"
   type        = string
