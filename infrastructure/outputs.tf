@@ -18,10 +18,12 @@ output "postgresql_server_name" {
   value = module.database.postgresql_server_name
 }
 
+# URL du compte de stockage
 output "storage_account_url" {
   value = module.blob_storage.storage_account_url
 }
 
+# ID du compte de stockage
 output "storage_account_id" {
   value = module.blob_storage.storage_account_id
 }

@@ -53,6 +53,7 @@ variable "database_subnet_name" {
   default     = "database-subnet"                     # Nom par défaut pour une utilisation standard.
 }
 
+# Variable permettant d'obtenir des noms aléatoires lors de la création.
 variable "random_suffix" {
   description = "Suffixe aléatoire pour rendre les noms uniques"
   type        = string
