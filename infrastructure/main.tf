@@ -75,6 +75,8 @@ module "database" {
 
   db_subnet_id            = module.network.database_subnet_id
   postgresql_server_id    = module.database.postgresql_server_id
+
+  depends_on = [module.network]
 }
 
 locals {
