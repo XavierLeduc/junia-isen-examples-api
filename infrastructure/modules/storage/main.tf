@@ -7,9 +7,10 @@ resource "azurerm_storage_account" "storage_account" {
 }
 
 resource "azurerm_storage_container" "storage_container" {
-  name                  = var.container_name                          # Nom du conteneur
-  storage_account_name  = azurerm_storage_account.storage_account.name # Référence au compte de stockage créé
-  container_access_type = "private"                                   # Type d'accès au conteneur
+  name                  = var.container_name
+  storage_account_name  = azurerm_storage_account.storage_account.name
+  container_access_type = "private"
+  depends_on            = [azurerm_storage_account.storage_account]
 }
 
 resource "azurerm_storage_account_network_rules" "blob_network_rules" {
@@ -21,9 +22,10 @@ resource "azurerm_storage_account_network_rules" "blob_network_rules" {
 }
 
 resource "azurerm_storage_blob" "quotes_blob" {
-  name                   = "quotes.json" # Nom du fichier dans le conteneur
+  name                   = "quotes.json"
   storage_account_name   = azurerm_storage_account.storage_account.name
   storage_container_name = azurerm_storage_container.storage_container.name
   type                   = "Block"
-  source                 = "${path.module}/quotes.json" # Chemin local du fichier
+  source                 = "${path.module}/quotes.json"
+  depends_on             = [azurerm_storage_container.storage_container]
 }

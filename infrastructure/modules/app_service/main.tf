@@ -41,7 +41,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "vnet_integratio
 resource "azurerm_role_assignment" "app_service_storage_access" {
   principal_id         = azurerm_app_service.app_service.identity[0].principal_id
   role_definition_name = "Storage Blob Data Reader"
-  scope                = var.storage_account_id
+  scope                = var.storage_account_id  # Utilisation de la variable transmise depuis main.tf
 }
 
 

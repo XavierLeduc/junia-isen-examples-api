@@ -42,14 +42,14 @@ module "app_service" {
   docker_image          = var.docker_image
   app_subnet_id         = module.network.app_subnet_id
   vnet_name             = module.network.vnet_name
-  app_service_id        = module.app_service.app_service_id  # Passez l'ID de l'App Service
-  vnet_id               = module.network.vnet_id  # Passez l'ID du VNet
+  app_service_id        = module.app_service.app_service_id
+  vnet_id               = module.network.vnet_id
 
-  storage_account_url   = module.blob_storage.storage_account_url
-  storage_account_id    = module.blob_storage.storage_account_id
-
+  storage_account_url   = module.blob_storage.storage_container_url
+  storage_account_id    = module.blob_storage.storage_account_id # Ajout de cette ligne
   storage_subnet_id     = module.network.storage_subnet_id
 }
+
 
 
 

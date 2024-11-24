@@ -35,3 +35,6 @@ output "storage_account_key" {
   value = azurerm_storage_account.storage_account.primary_access_key
 }
 
+output "storage_container_url" {
+  value = "${azurerm_storage_account.storage_account.primary_blob_endpoint}${azurerm_storage_container.storage_container.name}/"
+}
