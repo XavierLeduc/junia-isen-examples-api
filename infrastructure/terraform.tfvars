@@ -33,7 +33,7 @@ storage_account_name = "juniaexestorageacct12"
 
 # Nom du conteneur blob
 # Conteneur dans le compte de stockage pour stocker des fichiers ou des données.
-container_name = "junia-exe-container12"
+container_name = "api"
 
 # Nom du serveur PostgreSQL Flexible
 # Nom unique pour le serveur PostgreSQL Flexible créé dans Azure.
