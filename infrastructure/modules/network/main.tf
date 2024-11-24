@@ -34,7 +34,18 @@ resource "azurerm_subnet" "storage_subnet" {
   address_prefixes     = ["10.0.2.0/24"]              # Plage d'adresses spécifique pour ce sous-réseau.
 
   service_endpoints = ["Microsoft.Storage"]
+
+  delegation {
+  name = "delegation-for-app-service"
+  service_delegation {
+    name    = "Microsoft.Web/serverFarms"
+    actions = [
+      "Microsoft.Network/virtualNetworks/subnets/join/action"
+    ]
+    }
+  }
 }
+
 
 # Ressource : Sous-réseau pour la base de données
 # Sous-réseau dédié au serveur PostgreSQL Flexible. Configure une délégation pour autoriser l'utilisation de ce sous-réseau.
