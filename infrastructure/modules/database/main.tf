@@ -43,12 +43,12 @@ resource "azurerm_private_dns_zone" "postgresql_dns_zone" {
 
 # Ressource : Lien entre la zone DNS privée et le réseau virtuel
 # Cette ressource associe la zone DNS privée PostgreSQL Flexible Server au réseau virtuel.
-/*resource "azurerm_private_dns_zone_virtual_network_link" "dns_zone_link" {
+resource "azurerm_private_dns_zone_virtual_network_link" "dns_zone_link" {
   name                  = "postgresql-private-dns-vnet-link"
   resource_group_name   = var.resource_group_name
   private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns_zone.name
   virtual_network_id    = var.vnet_id
-}*/
+}
 
 
 

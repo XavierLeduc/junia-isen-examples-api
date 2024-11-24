@@ -19,4 +19,8 @@ output "database_name" {
   value = azurerm_postgresql_flexible_server_database.database.name
 }
 
+output "database_server_fqdn" {
+  description = "Fully Qualified Domain Name for the PostgreSQL server"
+  value       = azurerm_postgresql_flexible_server.postgresql.fqdn
+}
 
