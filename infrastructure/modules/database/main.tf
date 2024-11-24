@@ -56,14 +56,14 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
   name                = "allow-vnet"
   start_ip_address    = "10.0.0.0"
   end_ip_address      = "10.255.255.255"
-  server_id           = var.postgresql_server_id
-
+  server_id           = azurerm_postgresql_flexible_server.postgresql.id
 }
 
 resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
-      sleep 60
+      echo "Waiting for DNS and network propagation..."
+      sleep 120
       echo "Testing DNS resolution..."
       nslookup ${azurerm_postgresql_flexible_server.postgresql.fqdn} || exit 1
       echo "Testing connectivity to PostgreSQL server..."
@@ -80,5 +80,8 @@ resource "null_resource" "initialize_database" {
       PGPASSWORD = var.admin_password
     }
   }
-  depends_on = [azurerm_postgresql_flexible_server_database.database]
+  depends_on = [
+    azurerm_postgresql_flexible_server_database.database,
+    azurerm_private_dns_zone_virtual_network_link.dns_zone_link
+  ]
 }
