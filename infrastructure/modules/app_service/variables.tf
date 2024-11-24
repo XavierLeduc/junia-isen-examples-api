@@ -65,3 +65,8 @@ variable "storage_account_id" {
   description = "ID du compte de stockage Azure pour l'accès aux blobs."
   type        = string
 }
+
+variable "storage_subnet_id" {
+  description = "ID du sous-réseau de stockage"
+  type        = string
+}

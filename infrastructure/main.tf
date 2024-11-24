@@ -47,6 +47,8 @@ module "app_service" {
 
   storage_account_url   = module.blob_storage.storage_account_url
   storage_account_id    = module.blob_storage.storage_account_id
+
+  storage_subnet_id     = module.network.storage_subnet_id
 }
 
 
