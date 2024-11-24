@@ -59,7 +59,7 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
   server_id           = azurerm_postgresql_flexible_server.postgresql.id
 }
 
-resource "null_resource" "initialize_database" {
+/*resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
       echo "Waiting for DNS and network propagation..."
@@ -84,4 +84,4 @@ resource "null_resource" "initialize_database" {
     azurerm_postgresql_flexible_server_database.database,
     azurerm_private_dns_zone_virtual_network_link.dns_zone_link
   ]
-}
+}*/
