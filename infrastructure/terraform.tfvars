@@ -1,6 +1,6 @@
 # ID de l'abonnement Azure
 # Utilisé pour identifier l'abonnement dans lequel les ressources seront créées.
-subscription_id = "3586831e-0b85-4e41-842d-a48ee598d1fd"
+subscription_id = "0e2289e6-99f2-4e54-b3ba-47212bcdd42e"
 
 # Nom du groupe de ressources
 # Groupe Azure qui regroupe logiquement toutes les ressources associées à ce projet.
@@ -9,7 +9,7 @@ resource_group_name = "junia-exe-ressource-xavier"
 # Région Azure
 # Spécifie la région où toutes les ressources seront déployées.
 # Exemple : "North Europe" pour les serveurs situés en Europe du Nord.
-location = "France Central"
+location = "uksouth"
 
 # Nom du réseau virtuel (VNet)
 # Le réseau virtuel Azure qui connecte toutes les ressources de manière sécurisée.

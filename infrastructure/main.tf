@@ -52,13 +52,11 @@ module "app_service" {
 # Module pour configurer un compte de stockage et un conteneur blob.
 module "blob_storage" {
   source                = "./modules/storage"
-  storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24) # Limite à 24 caractères
-  container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"
-  resource_group_name   = azurerm_resource_group.resource_group.name
-  location              = var.location
-
-  blob_subnet_id        = local.blob_subnet_id
-  storage_account_id    = local.storage_account_id
+  storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24) # Nom unique
+  container_name        = "${var.container_name}-${random_id.unique_suffix.hex}"                     # Nom du conteneur
+  resource_group_name   = azurerm_resource_group.resource_group.name                                 # Passe le groupe de ressources complet
+  location              = var.location                                                              # Région Azure
+  blob_subnet_id        = module.network.storage_subnet_id                                          # Sous-réseau pour les règles réseau
 }
 
 # Database Module
@@ -80,17 +78,8 @@ module "database" {
 
 
 locals {
-  base_path       = "/subscriptions/${var.subscription_id}/resourceGroups/${var.resource_group_name}/providers"
-  vnet_path       = "${local.base_path}/Microsoft.Network/virtualNetworks/${var.vnet_name}"
-  storage_path    = "${local.base_path}/Microsoft.Storage/storageAccounts/${var.storage_account_name}"
-  postgresql_path = "${local.base_path}/Microsoft.DBforPostgreSQL/flexibleServers/${var.postgresql_server_name}"
-  app_service_path = "${local.base_path}/Microsoft.Web/sites/${var.app_service_plan_name}"
-
-  # Chemins spécifiques
-  blob_subnet_id       = "${local.vnet_path}/subnets/storage-subnet"
-  storage_account_id   = "${local.storage_path}"
-  db_subnet_id         = "${local.vnet_path}/subnets/database-subnet"
-  postgresql_server_id = "${local.postgresql_path}"
-  app_subnet_id        = "${local.vnet_path}/subnets/app-subnet"
-  app_service_id       = "${local.app_service_path}"
+  blob_subnet_id       = module.network.storage_subnet_id
+  storage_account_id   = module.blob_storage.storage_account_name
+  db_subnet_id         = module.network.database_subnet_id
+  app_subnet_id        = module.network.app_subnet_id
 }
