@@ -20,3 +20,11 @@ resource "azurerm_storage_account_network_rules" "blob_network_rules" {
 
   depends_on = [azurerm_storage_account.storage_account]                 # S'assurer que le compte de stockage est créé
 }
+
+resource "azurerm_storage_blob" "quotes_blob" {
+  name                   = "quotes.json" # Nom du fichier dans le conteneur
+  storage_account_name   = azurerm_storage_account.storage_account.name
+  storage_container_name = azurerm_storage_container.storage_container.name
+  type                   = "Block"
+  source                 = "${path.module}/quotes.json" # Chemin local du fichier
+}

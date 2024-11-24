@@ -56,3 +56,12 @@ variable "vnet_id" {
   type        = string
 }
 
+variable "storage_account_url" {
+  description = "URL du compte de stockage pour l'accès aux blobs."
+  type        = string
+}
+
+variable "storage_account_id" {
+  description = "ID du compte de stockage Azure pour l'accès aux blobs."
+  type        = string
+}

@@ -17,3 +17,11 @@ output "container_url" {
 output "postgresql_server_name" {
   value = module.database.postgresql_server_name
 }
+
+output "storage_account_url" {
+  value = module.blob_storage.storage_account_url
+}
+
+output "storage_account_id" {
+  value = module.blob_storage.storage_account_id
+}
