@@ -59,3 +59,4 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
   server_id           = var.postgresql_server_id
 
 }
+

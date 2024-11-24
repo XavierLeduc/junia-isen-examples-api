@@ -53,3 +53,38 @@ resource "azurerm_subnet" "database_subnet" {
   }
 }
 
+resource "azurerm_network_security_group" "app_nsg" {
+  name                = "app-nsg"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  security_rule {
+    name                       = "AllowDbSubnetTraffic"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "10.0.3.0/24" # Db subnet
+    destination_address_prefix = "10.0.1.0/24" # App subnet
+  }
+}
+
+resource "azurerm_network_security_group" "db_nsg" {
+  name                = "db-nsg"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+
+  security_rule {
+    name                       = "AllowAppSubnetTraffic"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "10.0.1.0/24"
+    destination_address_prefix = "10.0.3.0/24"
+  }
+}
