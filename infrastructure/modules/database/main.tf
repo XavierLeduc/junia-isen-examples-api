@@ -64,6 +64,11 @@ resource "null_resource" "initialize_database" {
   provisioner "local-exec" {
     command = <<EOT
       sleep 60
+      echo "Testing DNS resolution..."
+      nslookup ${azurerm_postgresql_flexible_server.postgresql.fqdn} || exit 1
+      echo "Testing connectivity to PostgreSQL server..."
+      nc -zv ${azurerm_postgresql_flexible_server.postgresql.fqdn} 5432 || exit 1
+      echo "Executing SQL script..."
       PGPASSWORD=${var.admin_password} psql \
         --host=${azurerm_postgresql_flexible_server.postgresql.fqdn} \
         --port=5432 \
