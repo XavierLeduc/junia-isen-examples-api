@@ -91,15 +91,16 @@ jobs:
             - name: Debug secrets
               run: |
                 echo "Checking AZURE_CREDENTIALS"
-                echo "AZURE_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId')"
-                echo "AZURE_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')"
+                echo "Extracted AZURE_CLIENT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId')"
+                echo "Extracted AZURE_SUBSCRIPTION_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')"
+                echo "Extracted AZURE_TENANT_ID=$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.tenantId')"
 
             - name: Attribuer les permissions nécessaires
               run: |
                 az role assignment create \
-                  --assignee ${{ secrets.AZURE_CLIENT_ID }} \
+                  --assignee $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.clientId') \
                   --role "Owner" \
-                  --scope /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}
+                  --scope /subscriptions/$(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r '.subscriptionId')
 
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v2
