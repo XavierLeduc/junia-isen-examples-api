@@ -88,6 +88,11 @@ jobs:
               with: 
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+            - name: Debug secrets
+              run: |
+                echo "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}"
+                echo "AZURE_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
             - name: Vérification des permissions Azure
               run: |
                 az role assignment list --assignee ${{ secrets.AZURE_CLIENT_ID }} --scope /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}
