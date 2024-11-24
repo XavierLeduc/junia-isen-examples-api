@@ -25,8 +25,7 @@ resource "azurerm_app_service" "app_service" { #Déploiement de l'appli
     "STORAGE_ACCOUNT_URL"                 = var.storage_account_url
 
     # Variables de connexion à la base de données PostgreSQL
-    #"DATABASE_HOST"                       = "${var.postgresql_server_name}.postgres.database.azure.com"
-    "DATABASE_HOST"                       = azurerm_postgresql_flexible_server.postgresql.fqdn
+    "DATABASE_HOST"                       = "${var.postgresql_server_name}.postgres.database.azure.com"
     "DATABASE_PORT"                       = "5432"
     "DATABASE_NAME"                       = var.database_name
     "DATABASE_USER"                       = var.admin_username

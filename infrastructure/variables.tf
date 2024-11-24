@@ -97,6 +97,7 @@ variable "database_name" {
 variable "docker_image" {
     description = "L'image Docker a deployé"
     type        = string
+    default = ""
 }
 
 

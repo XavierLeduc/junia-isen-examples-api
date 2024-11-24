@@ -50,6 +50,7 @@ module "app_service" {
   admin_username         = var.admin_username
   admin_password         = var.admin_password
   
+
 }
 
 # Blob_storage 
