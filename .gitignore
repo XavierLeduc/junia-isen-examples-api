@@ -165,7 +165,7 @@ infrastructure/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.10
 
 # Terraform
 infrastructure/.terraform
-infrastructure/terraform.tfvars
+terraform.tfvars
 terraform.tfstate
 terraform.tfstate.*
 *.lock.hcl
