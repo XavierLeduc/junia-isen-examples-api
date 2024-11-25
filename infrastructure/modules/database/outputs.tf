@@ -20,7 +20,10 @@ output "database_name" {
 }
 
 output "postgresql_private_ip" {
-  value       = tolist(data.azurerm_private_dns_a_record.postgresql_a_record.records)[0]
-  description = "Adresse IP privée de l'instance PostgreSQL résolue via DNS"
+  value = azurerm_postgresql_flexible_server.postgresql.fqdn
 }
 
+output "postgresql_fqdn" {
+  value = azurerm_postgresql_flexible_server.postgresql.fqdn
+  description = "Fully Qualified Domain Name du serveur PostgreSQL"
+}

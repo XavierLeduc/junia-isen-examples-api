@@ -88,7 +88,8 @@ variable "admin_password" {
   sensitive   = true
 }
 
-variable "postgresql_private_ip" {
-  description = "Adresse IP privée de la base de données PostgreSQL"
+
+variable "postgresql_fqdn" {
+  description = "Fully Qualified Domain Name de PostgreSQL Flexible Server"
   type        = string
 }

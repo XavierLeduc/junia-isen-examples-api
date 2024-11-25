@@ -37,8 +37,8 @@ resource "azurerm_postgresql_flexible_server_database" "database" {
 # Cette ressource configure une zone DNS privée spécifique à PostgreSQL Flexible Server.
 # Elle est utilisée pour gérer les connexions sécurisées à l'intérieur du réseau virtuel.
 resource "azurerm_private_dns_zone" "postgresql_dns_zone" {
-  name                = "privatelink.postgres.database.azure.com" # Nom de la zone DNS privée.
-  resource_group_name = var.resource_group_name                  # Groupe de ressources Azure.
+  name                = "privatelink.postgres.database.azure.com"
+  resource_group_name = var.resource_group_name
 }
 
 # Ressource : Lien entre la zone DNS privée et le réseau virtuel
