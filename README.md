@@ -46,4 +46,12 @@ Voici comment notre dépôt GitHub est organisé :
 2. Dans ./infrastructure, renommez le fichier "terraform.tfvars.sample" en "terraform.tfvars" et remplissez le avec toutes les informations requises.  
 3. Dans le même chemin, exécuter les commandes : "terraform init", "terraform plan" et "terraform apply".
 4. Une fois l’infrastructure déployée, créez une table examples dans la base de données PostgreSQL et ajoutez-y des données. 
-5. Et voila ! C'est finit pour l'installation !  
+5. Et voila ! C'est finit pour l'installation !
+
+
+# Problème rencontés. 
+
+Lors de la réalisation de ce projet nous avons rencontré différentes problématiques qui nous ont ralenti : 
+    - Rencontre de problèmes liés à l'accés à la databse, 
+    - Problème de provision ING de la database, 
+    - Mauvaise nomenclature de l'APP service 
