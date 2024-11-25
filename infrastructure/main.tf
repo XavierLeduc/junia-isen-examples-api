@@ -51,8 +51,6 @@ module "app_service" {
   database_name          = module.database.database_name
   admin_username         = var.admin_username
   admin_password         = var.admin_password
-  
-
 }
 
 # Module du Blob_storage 
