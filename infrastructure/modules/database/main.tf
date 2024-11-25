@@ -71,3 +71,14 @@ data "azurerm_network_interface" "postgresql_nic" {
   name  = "${azurerm_postgresql_flexible_server.postgresql.name}-nic-0" # NIC associée au serveur PostgreSQL
   resource_group_name = var.resource_group_name
 }
+
+data "azurerm_private_dns_zone" "postgresql_dns_zone" {
+  name                = "privatelink.postgres.database.azure.com"
+  resource_group_name = var.resource_group_name
+}
+
+data "azurerm_private_dns_a_record" "postgresql_a_record" {
+  name                = azurerm_postgresql_flexible_server.postgresql.name
+  zone_name           = data.azurerm_private_dns_zone.postgresql_dns_zone.name
+  resource_group_name = var.resource_group_name
+}

@@ -20,7 +20,7 @@ output "database_name" {
 }
 
 output "postgresql_private_ip" {
-  value = data.azurerm_network_interface.postgresql_nic[0].ip_configuration[0].private_ip_address
-  description = "Adresse IP privée de l'instance PostgreSQL"
+  value       = tolist(data.azurerm_private_dns_a_record.postgresql_a_record.records)[0]
+  description = "Adresse IP privée de l'instance PostgreSQL résolue via DNS"
 }
 
