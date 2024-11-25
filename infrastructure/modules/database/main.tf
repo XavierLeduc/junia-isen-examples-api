@@ -59,3 +59,9 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
   server_id           = azurerm_postgresql_flexible_server.postgresql.id
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_app_service" {
+  name                = "allow-app-service"
+  server_id           = azurerm_postgresql_flexible_server.postgresql.id
+  start_ip_address    = "10.0.1.0" # Subnet de l'App Service
+  end_ip_address      = "10.0.1.255"
+}

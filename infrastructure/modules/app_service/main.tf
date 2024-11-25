@@ -28,7 +28,7 @@ resource "azurerm_app_service" "app_service" { #Déploiement de l'appli
     "DATABASE_HOST"                       = "${var.postgresql_server_name}.postgres.database.azure.com"
     "DATABASE_PORT"                       = "5432"
     "DATABASE_NAME"                       = var.database_name
-    "DATABASE_USER"                       = var.admin_username
+    "DATABASE_USER"                       = "${var.admin_username}@${var.postgresql_server_name}"
     "DATABASE_PASSWORD"                   = var.admin_password
     
   }
