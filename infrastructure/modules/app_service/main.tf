@@ -28,7 +28,7 @@ resource "azurerm_app_service" "app_service" {
     "DATABASE_HOST"                       = var.postgresql_fqdn
     "DATABASE_PORT"                       = "5432"
     "DATABASE_NAME"                       = var.database_name
-    "DATABASE_USER"                       = "${var.admin_username}@${var.postgresql_server_name}"
+    "DATABASE_USER"                       = var.admin_username
     "DATABASE_PASSWORD"                   = var.admin_password
   }
 }
