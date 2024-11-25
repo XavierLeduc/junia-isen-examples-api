@@ -29,7 +29,7 @@ module "network" {
   random_suffix       = random_id.unique_suffix.hex
 }
 
-# App Service Module
+# Module de l'App Service
 module "app_service" {
   source                = "./modules/app_service"
   resource_group_name   = azurerm_resource_group.resource_group.name
@@ -53,7 +53,7 @@ module "app_service" {
 
 }
 
-# Blob_storage 
+# Module du Blob_storage 
 module "blob_storage" {
   source                = "./modules/storage"
   storage_account_name  = substr("${var.storage_account_name}${random_id.unique_suffix.hex}", 0, 24)
