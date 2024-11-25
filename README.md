@@ -45,7 +45,7 @@ Voici comment notre dépôt GitHub est organisé :
 1. Clonez ce dépôt sur votre machine et ouvrez le avec un IDE quelconque. 
 2. Dans ./infrastructure, renommez le fichier "terraform.tfvars.sample" en "terraform.tfvars" et remplissez le avec toutes les informations requises.  
 3. Dans le même chemin, exécuter les commandes : "terraform init", "terraform plan" et "terraform apply".
-4. Une fois l’infrastructure déployée, créez une table examples en faisant une requête POST soit avec curl -X POST https://adressedel'appservice/data ou bien avec Postman.
+4. Une fois l’infrastructure déployée, créez une table examples en faisant une requête POST soit avec ```curl -X POST https://<adressedevotreappservice>/data ou bien avec Postman.```
 5. Et voila ! C'est finit pour l'installation !
 
 
