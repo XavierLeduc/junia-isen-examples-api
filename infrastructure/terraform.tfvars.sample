@@ -36,7 +36,7 @@ storage_account_name = ""
 
 # Nom du conteneur blob
 # Conteneur dans le compte de stockage pour stocker des fichiers ou des données.
-container_name = ""
+container_name = "api"
 
 # Nom du serveur PostgreSQL Flexible
 # Nom unique pour le serveur PostgreSQL Flexible créé dans Azure.
