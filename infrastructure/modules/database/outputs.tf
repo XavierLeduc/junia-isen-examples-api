@@ -19,5 +19,8 @@ output "database_name" {
   value = azurerm_postgresql_flexible_server_database.database.name
 }
 
-
+output "postgresql_private_ip" {
+  value = data.azurerm_network_interface.postgresql_nic[0].ip_configuration[0].private_ip_address
+  description = "Adresse IP privée de l'instance PostgreSQL"
+}
 

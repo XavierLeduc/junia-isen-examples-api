@@ -44,6 +44,8 @@ module "app_service" {
   storage_account_url   = module.blob_storage.storage_account_url
   storage_account_id    = module.blob_storage.storage_account_id
 
+  postgresql_private_ip = module.database.postgresql_private_ip
+
   # Variables PostgreSQL
   postgresql_server_name = module.database.postgresql_server_name
   database_name          = module.database.database_name

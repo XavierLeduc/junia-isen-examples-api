@@ -65,3 +65,9 @@ resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_app_service" 
   start_ip_address    = "10.0.1.0" # Subnet de l'App Service
   end_ip_address      = "10.0.1.255"
 }
+
+data "azurerm_network_interface" "postgresql_nic" {
+  count = 1
+  name  = "${azurerm_postgresql_flexible_server.postgresql.name}-nic-0" # NIC associée au serveur PostgreSQL
+  resource_group_name = var.resource_group_name
+}

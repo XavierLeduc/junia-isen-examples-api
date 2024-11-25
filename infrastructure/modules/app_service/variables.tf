@@ -87,3 +87,8 @@ variable "admin_password" {
   type        = string
   sensitive   = true
 }
+
+variable "postgresql_private_ip" {
+  description = "Adresse IP privée de la base de données PostgreSQL"
+  type        = string
+}
