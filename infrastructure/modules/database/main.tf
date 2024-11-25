@@ -22,17 +22,6 @@ resource "azurerm_postgresql_flexible_server_database" "database" {
   server_id  = azurerm_postgresql_flexible_server.postgresql.id
   charset    = "UTF8"
   collation  = "C"
-
-  provisioner "local-exec" {
-  command = <<EOT
-    PGPASSWORD=${var.admin_password} psql \
-    --host=${azurerm_postgresql_flexible_server.postgresql.fqdn} \
-    --port=5432 \
-    --username=${var.admin_username} \
-    --dbname=${self.name} \
-    -f ${path.module}/script.sql
-  EOT
-}
 }
 
 resource "azurerm_private_dns_zone" "postgresql_dns_zone" {
