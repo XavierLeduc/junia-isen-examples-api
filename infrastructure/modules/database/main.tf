@@ -36,3 +36,9 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dns_zone_link" {
   virtual_network_id    = var.vnet_id
 }
 
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_vnet" {
+  name                = "allow-vnet"
+  start_ip_address    = "10.0.0.0"
+  end_ip_address      = "10.255.255.255"
+  server_id           = azurerm_postgresql_flexible_server.postgresql.id
+}

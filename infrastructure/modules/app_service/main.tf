@@ -38,3 +38,8 @@ resource "azurerm_role_assignment" "app_service_storage_access" {
   role_definition_name = "Storage Blob Data Reader"
   scope                = var.storage_account_id
 }
+
+resource "azurerm_app_service_virtual_network_swift_connection" "app_service_vnet_integration" {
+  app_service_id = azurerm_app_service.app_service.id
+  subnet_id      = var.app_subnet_id
+}

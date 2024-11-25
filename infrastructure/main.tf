@@ -75,6 +75,9 @@ module "database" {
   subnet_id               = module.network.database_subnet_id
   vnet_id                 = module.network.vnet_id
 
+
+
+
   db_subnet_id            = module.network.database_subnet_id
   postgresql_server_id    = module.database.postgresql_server_id
 
