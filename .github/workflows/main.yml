@@ -9,9 +9,6 @@ on:
     push: #Déclenchement du Workflow lors d'un push sur les branches suivantes : 
         branches: 
             - main
-            - eliot
-            - Xavier
-            - Emile 
 
 env: 
     REGISTRY: ghcr.io #Adresse du registre Docker (GitHub Container Registry)
@@ -23,7 +20,7 @@ permissions: #Accord de permissions pour lire et publier (une image Docker par e
 
 jobs: 
     check_service: #Test de l'application lors des Pull Requests et des push + exécution des tests
-        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile'
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest #Utilise une VM Ubuntu pour exécuter (par défaut)
         steps: 
             - uses: actions/checkout@v4 #Télécharge le contenu du dépôt
@@ -40,7 +37,7 @@ jobs:
               run: uv run pytest tests/
 
     build_docker_image: #Construit une image Docker et publie sur Git
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/eliot' || github.ref == 'refs/heads/Xavier' || github.ref == 'refs/heads/Emile' 
+        if: github.ref == 'refs/heads/main'
         runs-on: ubuntu-latest #Utilisation d'ubuntu-latest
         steps: 
             - name: Checkout repository #Télécharge le code du dépôt
